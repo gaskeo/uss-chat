@@ -1,0 +1,17 @@
+.selectContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.select {
+    width: 100%;
+    box-sizing: border-box;
+    height: 35px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}

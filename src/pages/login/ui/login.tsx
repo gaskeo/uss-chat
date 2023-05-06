@@ -1,8 +1,10 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/login.module.css";
 import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, register, selectRoom} from "../../../storage";
-import {AuthMessages, messages} from "../../../storage/messages/messages";
+import {AuthMessages, messages, SystemMessages} from "../../../storage/messages/messages";
 import {Room, User} from "../../../storage/models";
+import {redirect, useNavigate} from "react-router-dom";
+import {Button, Header, Input, Select} from "../../../components/kit";
 
 interface LoginProps {
     updateCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -14,7 +16,7 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
         const password = passwordRef?.current?.value;
         const username = usernameRef?.current?.value;
         const roomId = roomRef?.current?.value;
-        if (!password || !username) return;
+        if (!password || !username) return updateMessage(SystemMessages.FIELDS_NOT_FILL);
 
         const message = loginStorage({username: username, password: password});
         updateMessage(message);
@@ -22,48 +24,34 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
             selectRoom(roomId !== "new" ? roomId : undefined);
             updateCurrentUser(getAuthUser());
             updateCurrentRoom(getCurrentRoom());
-        } else {
-            register({username: username, name: "Иван", password: password})
-            selectRoom(roomId !== "new" ? roomId : undefined);
-            updateCurrentUser(getAuthUser());
-            updateCurrentRoom(getCurrentRoom());
+            navigate("/room")
+            console.log("redirect")
         }
     }
-
+    const navigate = useNavigate();
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const roomRef = useRef<HTMLSelectElement>(null);
-    const [message, updateMessage] = useState<AuthMessages>(AuthMessages.OK)
+    const [message, updateMessage] = useState<AuthMessages | SystemMessages>(AuthMessages.OK)
     const rooms = getRooms();
     return (
         <div className={styles.loginContainer}>
             <div className={styles.loginForm}>
-                <h1 className={styles.loginHeader}>
+                <Header>
                     Войти в аккаунт
-                </h1>
+                </Header>
                 <form onSubmit={e => {
                     e.preventDefault();
                     login();
                 }}>
-                    <label className={styles.loginInput}>
-                        Username
-                        <input ref={usernameRef}/>
-                    </label>
-                    <label className={styles.loginInput}>
-                        Пароль
-                        <input ref={passwordRef}/>
-                    </label>
-                    <label className={styles.loginInput}>
-                        Комната
-                        <select ref={roomRef}>
-                            <option value="new">Новая комната</option>
-                            {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
-                        </select>
-                    </label>
+                    <Input label="Username" inputRef={usernameRef}/>
+                    <Input label="Пароль" inputRef={passwordRef} type="password"/>
+                    <Select label="Комната"
+                            selectRef={roomRef}
+                            items={[{value: "new", label: "Новая комната"}, ...rooms.map(r => ({value: r.name, label: r.name}))]}
+                    />
                     {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
-                    <button type="submit" className={styles.loginSubmit}>
-                        Войти
-                    </button>
+                    <Button type="submit" color="success">Войти</Button>
                 </form>
             </div>
         </div>

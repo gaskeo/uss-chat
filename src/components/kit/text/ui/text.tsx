@@ -3,12 +3,12 @@ import styles from "../styles/text.module.css";
 
 interface TextProps {
     children: React.ReactNode;
-    type?: "dominant" | "secondary"
+    color?: "dominant" | "secondary"
 }
 
-export default function Text({children, type}: TextProps) {
+export default function Text({children, color}: TextProps) {
     function getStyle() {
-        switch (type) {
+        switch (color) {
             case undefined:
             case "dominant":
                 return {color: "#000"};

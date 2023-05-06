@@ -9,15 +9,18 @@ interface MessageRowProps {
     message: string
     media?: string[]
     replyMessage?: { name: string, id: string, message: string };
+    myMessage?: boolean
 }
 
 
-export default function MessageRow({username, name, time, message}: MessageRowProps) {
+export default function MessageRow({username, name, time, message, myMessage}: MessageRowProps) {
+    console.log(myMessage)
     return (
-        <div className={styles.messageRowContainer}>
+        <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`} data-avatar={name[0]}>
+            <div className={styles.avatar}/>
             <div className={styles.messageHeader}>
                 <Text>{name}</Text>
-                <Text type="secondary">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
+                <Text color="secondary">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
             </div>
             <Text>{message}</Text>
         </div>

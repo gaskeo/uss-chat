@@ -10,7 +10,7 @@ interface JoinRowProps {
 export default function JoinRow({time, name}: JoinRowProps) {
     return (
         <div className={styles.joinRowContainer}>
-            <Text type="secondary">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
+            <Text color="secondary">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
             <Text>{name} присоединился к комнате</Text>
         </div>
     )

@@ -1,12 +1,44 @@
 .messageRowContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
     padding: 10px;
     box-sizing: border-box;
+    background-color: #effdde;
+    width: max-content;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+
+.myMessage {
+    align-self: end;
+    background-color: #fff;
+    margin-right: 50px;
 }
 
 .messageHeader {
     display: flex;
     gap: 5px;
+}
+
+.messageRowContainer:before {
+    background-color: #61dafb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    content: attr(data-avatar);
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0;
+    left: -40px;
+    border-radius: 50%;
+}
+
+.myMessage:before {
+    right: -40px;
+    left: unset;
 }

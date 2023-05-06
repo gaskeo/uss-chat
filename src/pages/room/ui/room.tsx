@@ -1,9 +1,9 @@
 import styles from "../styles/room.module.css";
 import React, {useEffect, useRef, useState} from "react";
-import {addEvent, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
+import {addEvent, getAuthUser, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
-import {Header} from "../../../components/kit";
+import {Button, Header, Input} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
 
 interface RoomProps {
@@ -41,6 +41,7 @@ export default function Room({roomId}: RoomProps) {
 
     const inputMessageRef = useRef<HTMLInputElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
+    const currentUser = getAuthUser();
 
     return (
         <div className={styles.roomContainer}>
@@ -68,6 +69,7 @@ export default function Room({roomId}: RoomProps) {
                                     name={user?.name || ""}
                                     message={e.message}
                                     id={e.id}
+                                    myMessage={e.user === currentUser?.username}
                                 />
                             default:
                                 return <div></div>
@@ -75,12 +77,12 @@ export default function Room({roomId}: RoomProps) {
                     })}
                 </div>
 
-                <form onSubmit={e => {
+                <form className={styles.inputContainer} onSubmit={e => {
                     e.preventDefault();
                     sendMessage();
                 }}>
-                    <input ref={inputMessageRef}/>
-                    <button type="submit">отправить</button>
+                    <Input inputRef={inputMessageRef}/>
+                    <Button color="success" type="submit">отправить</Button>
                 </form>
             </div>
         </div>
