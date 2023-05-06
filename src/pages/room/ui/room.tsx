@@ -1,6 +1,6 @@
 import styles from "../styles/room.module.css";
-import React from "react";
-import {getRoom, getRoomEvents, getUserPublic} from "../../../storage";
+import React, {useRef, useState} from "react";
+import {addEvent, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
 import {Header} from "../../../components/kit";
@@ -10,8 +10,29 @@ interface RoomProps {
 }
 
 export default function Room({roomId}: RoomProps) {
-    const events = getRoomEvents(roomId);
+    window.addEventListener('storage', function(event){
+        if (event.storageArea === localStorage) {
+            updateEvents(getRoomEvents(roomId));
+        }
+    });
+
+    function sendMessage() {
+        const message = inputMessageRef?.current?.value;
+        if (!message || message.length < 1) {
+            return
+        }
+        addEvent(roomId, {
+            type: EventTypes.MESSAGE,
+            message
+        })
+        updateEvents(getRoomEvents(roomId))
+    }
+
+    const [events, updateEvents] = useState(getRoomEvents(roomId));
     const room = getRoom(roomId);
+
+    const inputMessageRef = useRef<HTMLInputElement>(null);
+
     return (
         <div className={styles.roomContainer}>
             <div className={styles.chatContainer}>
@@ -30,10 +51,19 @@ export default function Room({roomId}: RoomProps) {
                                     username={e.user}
                                     name={user?.name || ""}
                                 />
+                            case EventTypes.MESSAGE:
+                                return <div>{e.message}</div>
                             default:
                                 return <div></div>
                         }
                     })}
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        sendMessage();
+                    }}>
+                        <input ref={inputMessageRef}/>
+                        <button type="submit">отправить</button>
+                    </form>
                 </div>
             </div>
         </div>

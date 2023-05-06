@@ -24,23 +24,44 @@ export enum EventTypes {
 
 export interface EventJoin {
     type: EventTypes.JOIN,
+    id: string,
     time: string,
     user: string
 }
+
+export interface EventJoinPublic {
+    type: EventTypes.JOIN;
+}
+
 export interface EventMessage {
     type: EventTypes.MESSAGE,
     id: string
     time: string,
     user: string,
     message: string,
-    media: string[],
-    replyId: string
+    media?: string[],
+    replyId?: string
+}
+
+export interface EventMessagePublic {
+    type: EventTypes.MESSAGE,
+    message: string,
+    media?: string[],
+    replyId?: string
 }
 
 export interface EventReaction {
     type: EventTypes.REACTION,
+    id: string,
+    time: string
     messageId: string;
     user: string;
 }
 
+export interface EventReactionPublic {
+    type: EventTypes.REACTION,
+    messageId: string;
+}
+
 export type Event = EventJoin | EventMessage | EventReaction;
+export type EventPublic = EventJoinPublic | EventMessagePublic | EventReactionPublic;

@@ -21,8 +21,6 @@ function createRoom(name?: string) {
     setRooms(rooms);
     addEvent(id, {
         type: EventTypes.JOIN,
-        time: Number(new Date()).toString(),
-        user: authUser.username
     })
     return id;
 }
