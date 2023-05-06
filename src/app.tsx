@@ -5,6 +5,7 @@ import Login from "./pages/login";
 
 function App() {
   const [currentUser, updateCurrentUser] = useState(getAuthUser());
+  const [currentRoom, updateCurrentRoom] = useState(null);
   if (!currentUser) return <Login updateCurrentUser={updateCurrentUser}/>;
   return (
     <div className="App">

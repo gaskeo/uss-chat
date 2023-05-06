@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/login.module.css";
-import {getAuthUser, login as loginStorage} from "../../../storage";
+import {getAuthUser, getRooms, login as loginStorage, selectRoom} from "../../../storage";
 import {AuthMessages, messages} from "../../../storage/messages/messages";
 import {User} from "../../../storage/models";
 
@@ -12,19 +12,22 @@ export default function Login({updateCurrentUser}: LoginProps) {
     function login() {
         const password = passwordRef?.current?.value;
         const username = usernameRef?.current?.value;
+        const roomId = roomRef?.current?.value;
         if (!password || !username) return;
 
         const message = loginStorage({username: username, password: password});
         updateMessage(message);
         if (message === AuthMessages.OK) {
-            updateCurrentUser(getAuthUser());
+            selectRoom(roomId !== "new" ? roomId : undefined);
+            return updateCurrentUser(getAuthUser());
         }
     }
 
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    const roomRef = useRef<HTMLInputElement>(null);
+    const roomRef = useRef<HTMLSelectElement>(null);
     const [message, updateMessage] = useState<AuthMessages>(AuthMessages.OK)
+    const rooms = getRooms();
     return (
         <div className={styles.loginContainer}>
             <div className={styles.loginForm}>
@@ -45,7 +48,10 @@ export default function Login({updateCurrentUser}: LoginProps) {
                     </label>
                     <label className={styles.loginInput}>
                         Комната
-                        <input ref={roomRef}/>
+                        <select ref={roomRef}>
+                            <option value="new">Новая комната</option>
+                            {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
+                        </select>
                     </label>
                     {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
                     <button type="submit" className={styles.loginSubmit}>
