@@ -1,14 +1,15 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/login.module.css";
-import {getAuthUser, getRooms, login as loginStorage, selectRoom} from "../../../storage";
+import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, register, selectRoom} from "../../../storage";
 import {AuthMessages, messages} from "../../../storage/messages/messages";
-import {User} from "../../../storage/models";
+import {Room, User} from "../../../storage/models";
 
 interface LoginProps {
     updateCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
+    updateCurrentRoom:  React.Dispatch<React.SetStateAction<Room | null>>
 }
 
-export default function Login({updateCurrentUser}: LoginProps) {
+export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps) {
     function login() {
         const password = passwordRef?.current?.value;
         const username = usernameRef?.current?.value;
@@ -19,7 +20,13 @@ export default function Login({updateCurrentUser}: LoginProps) {
         updateMessage(message);
         if (message === AuthMessages.OK) {
             selectRoom(roomId !== "new" ? roomId : undefined);
-            return updateCurrentUser(getAuthUser());
+            updateCurrentUser(getAuthUser());
+            updateCurrentRoom(getCurrentRoom());
+        } else {
+            register({username: username, name: "Иван", password: password})
+            selectRoom(roomId !== "new" ? roomId : undefined);
+            updateCurrentUser(getAuthUser());
+            updateCurrentRoom(getCurrentRoom());
         }
     }
 

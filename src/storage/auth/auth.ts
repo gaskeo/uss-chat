@@ -27,7 +27,7 @@ function register(user: User) {
         username: user.username
     });
 
-    localStorage.setItem(user.username, userJson);
+    localStorage.setItem(`user_${user.username}`, userJson);
     return AuthMessages.OK;
 }
 

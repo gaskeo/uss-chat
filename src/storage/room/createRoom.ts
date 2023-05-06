@@ -1,6 +1,8 @@
 import {getRooms} from "./getRooms";
 import {getAuthUser} from "../auth/getAuthUser";
 import {setRooms} from "./setRooms";
+import {addEvent} from "./addEvent";
+import {EventTypes} from "../models";
 
 function createRoom(name?: string) {
     const authUser = getAuthUser();
@@ -13,10 +15,15 @@ function createRoom(name?: string) {
     const rooms = getRooms();
     rooms.push({
         id: id,
-        name: name ? name: id,
+        name: name ? name : id,
         users: [authUser.username]
     })
     setRooms(rooms);
+    addEvent(id, {
+        type: EventTypes.JOIN,
+        time: Number(new Date()).toString(),
+        user: authUser.username
+    })
     return id;
 }
 
