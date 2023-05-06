@@ -3,7 +3,11 @@ import './app.css';
 import {addUser} from "./storage";
 
 function App() {
-  addUser()
+  console.log(addUser({
+    username: "gaskeo",
+    password: "12345678",
+    name: "Иван"
+  }))
   return (
     <div className="App">
       <header className="App-header">
