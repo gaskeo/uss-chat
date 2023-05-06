@@ -1,13 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './app.css';
-import {addUser} from "./storage";
+import {getAuthUser} from "./storage";
+import Login from "./pages/login";
 
 function App() {
-  console.log(addUser({
-    username: "gaskeo",
-    password: "12345678",
-    name: "Иван"
-  }))
+  const [currentUser, updateCurrentUser] = useState(getAuthUser());
+  if (!currentUser) return <Login updateCurrentUser={updateCurrentUser}/>;
   return (
     <div className="App">
       <header className="App-header">

@@ -10,7 +10,7 @@ interface User {
     name: string;
 }
 
-function addUser(user: User) {
+function register(user: User) {
     if (userExists(user.username)) {
         return AuthMessages.USER_EXISTS;
     }
@@ -31,4 +31,4 @@ function addUser(user: User) {
     return AuthMessages.OK;
 }
 
-export {addUser};
+export {register};

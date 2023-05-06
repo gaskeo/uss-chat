@@ -1,9 +1,4 @@
-interface User {
-    name: string,
-    password: string,
-    salt: string,
-    username: string
-}
+import {User} from "../models";
 
 function getUser(username: string): User | null {
     const userString = localStorage.getItem(username);
