@@ -3,8 +3,8 @@ import styles from "../styles/login.module.css";
 import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, register, selectRoom} from "../../../storage";
 import {AuthMessages, messages, SystemMessages} from "../../../storage/messages/messages";
 import {Room, User} from "../../../storage/models";
-import {redirect, useNavigate} from "react-router-dom";
-import {Button, Header, Input, Select} from "../../../components/kit";
+import {Link, redirect, useNavigate} from "react-router-dom";
+import {Button, Header, Input, Select, Text} from "../../../components/kit";
 
 interface LoginProps {
     updateCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -52,6 +52,7 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
                     />
                     {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
                     <Button type="submit" color="success">Войти</Button>
+                    <Text><Link to={"/register"}>Ещё нет аккаунта</Link></Text>
                 </form>
             </div>
         </div>

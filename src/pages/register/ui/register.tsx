@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import styles from "../styles/register.module.css";
 import {register as registerStorage} from "../../../storage";
 import {AuthMessages, messages, SystemMessages} from "../../../storage/messages/messages";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Input, Header, Text, Button} from "../../../components/kit";
 
 export default function Register() {
@@ -60,6 +60,7 @@ export default function Register() {
 
                     {message !== AuthMessages.OK && <Text>{messages[message]}</Text>}
                     <Button type="submit" color="success">Зарегистрироваться</Button>
+                    <Text><Link to={"/login"}>Уже есть аккаунт</Link></Text>
                 </form>
             </div>
         </div>

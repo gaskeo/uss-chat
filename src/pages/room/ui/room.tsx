@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {addEvent, getAuthUser, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventMessage, EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
-import {Button, Header, Input} from "../../../components/kit";
+import {Button, Header, Input, Text} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
 
 interface RoomProps {
@@ -74,7 +74,11 @@ export default function Room({roomId}: RoomProps) {
                                     name={user?.name || ""}
                                     message={e.message}
                                     id={e.id}
-                                    replyMessage={{message: replyMessage?.message, name: getUserPublic(replyMessage?.user)?.name || "", id: replyMessage?.id}}
+                                    replyMessage={{
+                                        message: replyMessage?.message,
+                                        name: getUserPublic(replyMessage?.user)?.name || "",
+                                        id: replyMessage?.id
+                                    }}
 
                                     onReply={(id) => updateReplyMessageId(id)}
                                     myMessage={e.user === currentUser?.username}
@@ -89,9 +93,16 @@ export default function Room({roomId}: RoomProps) {
                     e.preventDefault();
                     sendMessage();
                 }}>
-                    {replyMessage && replyMessage.type === EventTypes.MESSAGE && <p>{replyMessage.user}: {replyMessage.message}</p>}
-                    <Input inputRef={inputMessageRef}/>
-                    <Button color="success" type="submit">отправить</Button>
+                    {replyMessage && replyMessage.type === EventTypes.MESSAGE &&
+                        <span>
+                            <Text color="invert">{replyMessage.user}: {replyMessage.message}</Text>
+                            <div onClick={() => updateReplyMessageId("")}><Text color="invert">Отменить</Text></div>
+                        </span>
+                    }
+                    <div>
+                        <Input inputRef={inputMessageRef}/>
+                        <Button color="success" type="submit">отправить</Button>
+                    </div>
                 </form>
             </div>
         </div>

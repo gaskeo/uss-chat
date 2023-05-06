@@ -3,7 +3,7 @@ import styles from "../styles/text.module.css";
 
 interface TextProps {
     children: React.ReactNode;
-    color?: "dominant" | "secondary" | "link" | "accent"
+    color?: "dominant" | "secondary" | "link" | "accent" | "invert"
     size?: "s" | "m" | "l"
 }
 
@@ -19,6 +19,8 @@ export default function Text({size, children, color}: TextProps) {
                 return {color: "#5196ba"}
             case "accent":
                 return {color: "#f5a55b"}
+            case "invert":
+                return {color: "#fff"}
         }
     }
 
