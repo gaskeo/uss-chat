@@ -1,0 +1,21 @@
+.roomContainer {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.chatContainer {
+    padding: 10px;
+    background-color: blueviolet;
+    width: 90vw;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatHeader {
+    display: flex;
+    justify-content: space-between;
+    background-color: violet;
+}

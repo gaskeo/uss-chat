@@ -12,4 +12,6 @@ export {getRoomEvents} from "./room/getRoomEvents";
 export {addEvent} from "./room/addEvent";
 export {setEvents} from "./room/setEvents";
 export {getRoom} from "./room/getRoom";
+export {getUserPublic} from "./user/getUserPublic";
+
 
