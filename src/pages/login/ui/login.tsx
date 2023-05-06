@@ -47,7 +47,7 @@ export default function Login({updateCurrentUser}: LoginProps) {
                         Комната
                         <input ref={roomRef}/>
                     </label>
-                    {message !== AuthMessages.OK && <p>{messages[message]}</p>}
+                    {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
                     <button type="submit" className={styles.loginSubmit}>
                         Войти
                     </button>
