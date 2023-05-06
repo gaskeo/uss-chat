@@ -1,16 +1,17 @@
 import styles from "../styles/room.module.css";
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {addEvent, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
 import {Header} from "../../../components/kit";
+import MessageRow from "../../../components/events/messageRow";
 
 interface RoomProps {
     roomId: string;
 }
 
 export default function Room({roomId}: RoomProps) {
-    window.addEventListener('storage', function(event){
+    window.addEventListener('storage', function (event) {
         if (event.storageArea === localStorage) {
             updateEvents(getRoomEvents(roomId));
         }
@@ -26,12 +27,20 @@ export default function Room({roomId}: RoomProps) {
             message
         })
         updateEvents(getRoomEvents(roomId))
+        inputMessageRef.current.value = "";
     }
 
     const [events, updateEvents] = useState(getRoomEvents(roomId));
+
+    useEffect(() => {
+        chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
+
+    }, [events])
+
     const room = getRoom(roomId);
 
     const inputMessageRef = useRef<HTMLInputElement>(null);
+    const chatRef = useRef<HTMLDivElement>(null);
 
     return (
         <div className={styles.roomContainer}>
@@ -40,11 +49,11 @@ export default function Room({roomId}: RoomProps) {
                     <Header>{room?.name}</Header>
                     <p>Пользователей в комнате: {room?.users?.length}</p>
                 </div>
-                <div className={styles.chatContent}>
+                <div className={styles.chatContent} ref={chatRef}>
                     {events.map(e => {
+                        const user = getUserPublic(e.user);
                         switch (e.type) {
                             case EventTypes.JOIN:
-                                const user = getUserPublic(e.user);
                                 return <JoinRow
                                     key={e.time + e.type}
                                     time={e.time}
@@ -52,19 +61,27 @@ export default function Room({roomId}: RoomProps) {
                                     name={user?.name || ""}
                                 />
                             case EventTypes.MESSAGE:
-                                return <div>{e.message}</div>
+                                return <MessageRow
+                                    key={e.time + e.type}
+                                    time={e.time}
+                                    username={e.user}
+                                    name={user?.name || ""}
+                                    message={e.message}
+                                    id={e.id}
+                                />
                             default:
                                 return <div></div>
                         }
                     })}
-                    <form onSubmit={e => {
-                        e.preventDefault();
-                        sendMessage();
-                    }}>
-                        <input ref={inputMessageRef}/>
-                        <button type="submit">отправить</button>
-                    </form>
                 </div>
+
+                <form onSubmit={e => {
+                    e.preventDefault();
+                    sendMessage();
+                }}>
+                    <input ref={inputMessageRef}/>
+                    <button type="submit">отправить</button>
+                </form>
             </div>
         </div>
     );

@@ -1,0 +1,12 @@
+.messageRowContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.messageHeader {
+    display: flex;
+    gap: 5px;
+}

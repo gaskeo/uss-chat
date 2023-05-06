@@ -6,6 +6,7 @@ interface JoinRowProps {
     name: string;
     time: string;
 }
+
 export default function JoinRow({time, name}: JoinRowProps) {
     return (
         <div className={styles.joinRowContainer}>
