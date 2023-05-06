@@ -3,6 +3,6 @@ function getCurrentRoom() {
     if (!currentRoomString) {
         return null;
     }
-    return JSON.parse(currentRoomString);
+    return JSON.parse(currentRoomString).toString();
 }
 export {getCurrentRoom};
