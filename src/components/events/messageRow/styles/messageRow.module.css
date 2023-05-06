@@ -9,6 +9,8 @@
     width: max-content;
     border-radius: 10px;
     margin-left: 50px;
+    max-width: 60%;
+    word-wrap: anywhere;
 }
 
 .myMessage {
@@ -19,6 +21,8 @@
 
 .messageHeader {
     display: flex;
+    align-items: baseline;
+    justify-content: space-between;
     gap: 5px;
 }
 
@@ -41,4 +45,27 @@
 .myMessage:before {
     right: -40px;
     left: unset;
+}
+
+.replyText * {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.reply {
+    margin-left: 8px;
+    position: relative;
+}
+.reply * {
+    font-size: 14px;
+}
+
+.reply:before {
+    left: -8px;
+    position: absolute;
+    display: block;
+    content: "";
+    width: 4px;
+    height: 100%;
+    background-color: #61dafb;
 }

@@ -1,7 +1,7 @@
 import styles from "../styles/room.module.css";
 import React, {useEffect, useRef, useState} from "react";
 import {addEvent, getAuthUser, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
-import {EventTypes} from "../../../storage/models";
+import {EventMessage, EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
 import {Button, Header, Input} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
@@ -24,9 +24,11 @@ export default function Room({roomId}: RoomProps) {
         }
         addEvent(roomId, {
             type: EventTypes.MESSAGE,
-            message
+            message,
+            replyId: replyMessageId || undefined
         })
         updateEvents(getRoomEvents(roomId))
+        updateReplyMessageId('');
         inputMessageRef.current.value = "";
     }
 
@@ -42,6 +44,8 @@ export default function Room({roomId}: RoomProps) {
     const inputMessageRef = useRef<HTMLInputElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
     const currentUser = getAuthUser();
+    const [replyMessageId, updateReplyMessageId] = useState("");
+    const replyMessage = events.filter(e => (e.type === EventTypes.MESSAGE && e.id === replyMessageId))[0];
 
     return (
         <div className={styles.roomContainer}>
@@ -62,6 +66,7 @@ export default function Room({roomId}: RoomProps) {
                                     name={user?.name || ""}
                                 />
                             case EventTypes.MESSAGE:
+                                const replyMessage = events.filter(message => (message.type === EventTypes.MESSAGE && message.id === e.replyId))[0] as EventMessage;
                                 return <MessageRow
                                     key={e.time + e.type}
                                     time={e.time}
@@ -69,6 +74,9 @@ export default function Room({roomId}: RoomProps) {
                                     name={user?.name || ""}
                                     message={e.message}
                                     id={e.id}
+                                    replyMessage={{message: replyMessage?.message, name: getUserPublic(replyMessage?.user)?.name || "", id: replyMessage?.id}}
+
+                                    onReply={(id) => updateReplyMessageId(id)}
                                     myMessage={e.user === currentUser?.username}
                                 />
                             default:
@@ -81,6 +89,7 @@ export default function Room({roomId}: RoomProps) {
                     e.preventDefault();
                     sendMessage();
                 }}>
+                    {replyMessage && replyMessage.type === EventTypes.MESSAGE && <p>{replyMessage.user}: {replyMessage.message}</p>}
                     <Input inputRef={inputMessageRef}/>
                     <Button color="success" type="submit">отправить</Button>
                 </form>

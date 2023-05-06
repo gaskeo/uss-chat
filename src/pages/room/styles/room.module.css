@@ -29,7 +29,13 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-x: auto;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chatContent::-webkit-scrollbar {
+    display: none;
 }
 
 .inputContainer {
