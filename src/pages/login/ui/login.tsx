@@ -16,11 +16,13 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
         const password = passwordRef?.current?.value;
         const username = usernameRef?.current?.value;
         const roomId = roomRef?.current?.value;
+        console.log(roomRef?.current)
         if (!password || !username) return updateMessage(SystemMessages.FIELDS_NOT_FILL);
 
         const message = loginStorage({username: username, password: password});
         updateMessage(message);
         if (message === AuthMessages.OK) {
+            console.log(roomId)
             selectRoom(roomId !== "new" ? roomId : undefined);
             updateCurrentUser(getAuthUser());
             updateCurrentRoom(getCurrentRoom());
@@ -48,7 +50,7 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
                     <Input label="Пароль" inputRef={passwordRef} type="password"/>
                     <Select label="Комната"
                             selectRef={roomRef}
-                            items={[{value: "new", label: "Новая комната"}, ...rooms.map(r => ({value: r.name, label: r.name}))]}
+                            items={[{value: "new", label: "Новая комната"}, ...rooms.map(r => ({value: r.id, label: r.name}))]}
                     />
                     {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
                     <Button type="submit" color="success">Войти</Button>

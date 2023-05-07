@@ -13,5 +13,5 @@ export {addEvent} from "./room/addEvent";
 export {setEvents} from "./room/setEvents";
 export {getRoom} from "./room/getRoom";
 export {getUserPublic} from "./user/getUserPublic";
-
-
+export {logout} from "./auth/logout";
+export {setName} from "./room/setName";

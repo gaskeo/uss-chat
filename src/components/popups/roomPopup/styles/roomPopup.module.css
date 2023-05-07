@@ -1,0 +1,45 @@
+.background {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    opacity: .4;
+}
+
+.roomPopupContainer {
+    z-index: 5;
+    max-width: 500px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    max-height: 400px;
+    background-color: #effdde;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: start;
+    gap: 15px;
+}
+
+.roomPopupContainer > form {
+    display: flex;
+    align-items: end;
+    gap: 5px;
+    width: 100%;
+}
+
+.roomPopupContainer > form > div {
+    width: 100%;
+}
+
+.roomPopupContainer > form > button {
+    width: max-content;
+}

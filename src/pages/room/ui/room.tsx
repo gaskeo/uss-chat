@@ -5,6 +5,7 @@ import {EventMessage, EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
 import {Button, Header, Input, Text} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
+import RoomPopup from "../../../components/popups/roomPopup";
 
 interface RoomProps {
     roomId: string;
@@ -33,26 +34,25 @@ export default function Room({roomId}: RoomProps) {
     }
 
     const [events, updateEvents] = useState(getRoomEvents(roomId));
-
-    useEffect(() => {
-        chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
-
-    }, [events])
-
-    const room = getRoom(roomId);
-
+    const [room, updateRoom] = useState(getRoom(roomId));
     const inputMessageRef = useRef<HTMLInputElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
     const currentUser = getAuthUser();
     const [replyMessageId, updateReplyMessageId] = useState("");
     const replyMessage = events.filter(e => (e.type === EventTypes.MESSAGE && e.id === replyMessageId))[0];
+    const [popupOpen, updatePopupOpen] = useState(false);
+
+    useEffect(() => {
+        chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
+    }, [events])
 
     return (
         <div className={styles.roomContainer}>
+            {popupOpen && <RoomPopup roomId={roomId} updateRoom={updateRoom} onClose={() => updatePopupOpen(false)}/>}
             <div className={styles.chatContainer}>
-                <div className={styles.chatHeader}>
+                <div className={styles.chatHeader} onClick={() => updatePopupOpen(true)}>
                     <Header>{room?.name}</Header>
-                    <p>Пользователей в комнате: {room?.users?.length}</p>
+                    <p>Участников: {room?.users?.length}</p>
                 </div>
                 <div className={styles.chatContent} ref={chatRef}>
                     {events.map(e => {
