@@ -21,7 +21,8 @@ export interface Room {
 export enum EventTypes {
     JOIN,
     MESSAGE,
-    REACTION
+    REACTION,
+    DATE
 }
 
 export interface EventJoin {
@@ -65,5 +66,10 @@ export interface EventReactionPublic {
     messageId: string;
 }
 
-export type Event = EventJoin | EventMessage | EventReaction;
+export interface EventDate {
+    type: EventTypes.DATE;
+    time: string
+    id: string
+}
+export type Event = EventJoin | EventMessage | EventReaction | EventDate;
 export type EventPublic = EventJoinPublic | EventMessagePublic | EventReactionPublic;

@@ -3,10 +3,10 @@ import React, {useEffect, useRef, useState} from "react";
 import {addEvent, getAuthUser, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventMessage, EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
-import {Avatar, Button, Header, Input, Text} from "../../../components/kit";
+import {Avatar, Header} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
 import RoomPopup from "../../../components/popups/roomPopup";
-import {getRandomColor} from "../../../utils";
+import {MessageInput} from "../../../components/messageInput";
 
 interface RoomProps {
     roomId: string;
@@ -19,24 +19,21 @@ export default function Room({roomId}: RoomProps) {
         }
     });
 
-    function sendMessage() {
-        const message = inputMessageRef?.current?.value;
+    function sendMessage(message: string, replyId: string | undefined) {
         if (!message || message.length < 1) {
             return
         }
         addEvent(roomId, {
             type: EventTypes.MESSAGE,
             message,
-            replyId: replyMessageId || undefined
+            replyId: replyId
         })
         updateEvents(getRoomEvents(roomId))
         updateReplyMessageId('');
-        inputMessageRef.current.value = "";
     }
 
     const [events, updateEvents] = useState(getRoomEvents(roomId));
     const [room, updateRoom] = useState(getRoom(roomId));
-    const inputMessageRef = useRef<HTMLInputElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
     const currentUser = getAuthUser();
     const [replyMessageId, updateReplyMessageId] = useState("");
@@ -46,7 +43,7 @@ export default function Room({roomId}: RoomProps) {
     useEffect(() => {
         chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
     }, [events])
-    let date: Date;
+
     return (
         <div className={styles.roomContainer}>
             {popupOpen && <RoomPopup roomId={roomId} updateRoom={updateRoom} onClose={() => updatePopupOpen(false)}/>}
@@ -56,35 +53,28 @@ export default function Room({roomId}: RoomProps) {
                     <div className={styles.chatHeaderUserContainer}>
                         {room?.users.slice(0, 5).map(u => {
                             const user = getUserPublic(u);
-                            return <Avatar background={user?.color || ""} foreground="000" letter={user?.name[0] || ""}/>
+                            return <Avatar key={user?.username} background={user?.color || ""} foreground="000" letter={user?.name[0] || ""}/>
                         })}
                     </div>
                 </div>
                 <div className={styles.chatContent} ref={chatRef}>
                     {events.map(e => {
-                        const user = getUserPublic(e.user);
-                        let currentDate = new Date(Number(e.time));
-                        let addon = null;
-                        if (!date || date.getDate() !== currentDate.getDate() || date.getMonth() !== currentDate.getMonth() || date.getFullYear() !== currentDate.getFullYear()) {
-                            date = currentDate;
-                            addon = <div>{date.toLocaleString("ru-RU")}</div>
-                        }
+                        let user;
                         switch (e.type) {
+                            case EventTypes.DATE:
+                                return <div>{new Date(Number(e.time)).toLocaleDateString("ru-RU")}</div>
                             case EventTypes.JOIN:
-                                return <>
-                                    {addon}
-                                    <JoinRow
+                                user = getUserPublic(e.user);
+                                return <JoinRow
                                         key={e.time + e.type}
                                         time={e.time}
                                         username={e.user}
                                         name={user?.name || ""}
                                     />
-                                </>
                             case EventTypes.MESSAGE:
+                                user = getUserPublic(e.user);
                                 const replyMessage = events.filter(message => (message.type === EventTypes.MESSAGE && message.id === e.replyId))[0] as EventMessage;
-                                return <>
-                                {addon}
-                                <MessageRow
+                                return <MessageRow
                                     key={e.time + e.type}
                                     time={e.time}
                                     username={e.user}
@@ -101,28 +91,17 @@ export default function Room({roomId}: RoomProps) {
                                     onReply={(id) => updateReplyMessageId(id)}
                                     myMessage={e.user === currentUser?.username}
                                 />
-                                </>
                             default:
                                 return <div></div>
                         }
                     })}
                 </div>
+            <MessageInput
+                onSendMessage={sendMessage}
+                replyMessage={replyMessage as EventMessage}
+                onCancelReplyMessage={() => updateReplyMessageId("")}
+            />
 
-                <form className={styles.inputContainer} onSubmit={e => {
-                    e.preventDefault();
-                    sendMessage();
-                }}>
-                    {replyMessage && replyMessage.type === EventTypes.MESSAGE &&
-                        <span>
-                            <Text color="invert">{replyMessage.user}: {replyMessage.message}</Text>
-                            <div onClick={() => updateReplyMessageId("")}><Text color="invert">Отменить</Text></div>
-                        </span>
-                    }
-                    <div>
-                        <Input inputRef={inputMessageRef}/>
-                        <Button color="success" type="submit">отправить</Button>
-                    </div>
-                </form>
             </div>
         </div>
     );
