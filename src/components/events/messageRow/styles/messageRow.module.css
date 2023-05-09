@@ -9,6 +9,7 @@
     width: max-content;
     border-radius: 10px;
     margin-left: 50px;
+    min-width: 20%;
     max-width: 60%;
     word-wrap: anywhere;
 }
@@ -62,4 +63,11 @@
 .right {
     left: unset;
     right: 10px;
+}
+
+.contextMenu {
+    width: 120px;
+    height: 60px;
+    background-color: black;
+    position: absolute;
 }

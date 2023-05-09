@@ -45,7 +45,7 @@ export default function Room({roomId}: RoomProps) {
     useEffect(() => {
         chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
     }, [events])
-
+    let date: Date;
     return (
         <div className={styles.roomContainer}>
             {popupOpen && <RoomPopup roomId={roomId} updateRoom={updateRoom} onClose={() => updatePopupOpen(false)}/>}
@@ -57,17 +57,28 @@ export default function Room({roomId}: RoomProps) {
                 <div className={styles.chatContent} ref={chatRef}>
                     {events.map(e => {
                         const user = getUserPublic(e.user);
+                        let currentDate = new Date(Number(e.time));
+                        let addon = null;
+                        if (!date || date.getDate() !== currentDate.getDate() || date.getMonth() !== currentDate.getMonth() || date.getFullYear() !== currentDate.getFullYear()) {
+                            date = currentDate;
+                            addon = <div>{date.toLocaleString("ru-RU")}</div>
+                        }
                         switch (e.type) {
                             case EventTypes.JOIN:
-                                return <JoinRow
-                                    key={e.time + e.type}
-                                    time={e.time}
-                                    username={e.user}
-                                    name={user?.name || ""}
-                                />
+                                return <>
+                                    {addon}
+                                    <JoinRow
+                                        key={e.time + e.type}
+                                        time={e.time}
+                                        username={e.user}
+                                        name={user?.name || ""}
+                                    />
+                                </>
                             case EventTypes.MESSAGE:
                                 const replyMessage = events.filter(message => (message.type === EventTypes.MESSAGE && message.id === e.replyId))[0] as EventMessage;
-                                return <MessageRow
+                                return <>
+                                {addon}
+                                <MessageRow
                                     key={e.time + e.type}
                                     time={e.time}
                                     username={e.user}
@@ -83,6 +94,7 @@ export default function Room({roomId}: RoomProps) {
                                     onReply={(id) => updateReplyMessageId(id)}
                                     myMessage={e.user === currentUser?.username}
                                 />
+                                </>
                             default:
                                 return <div></div>
                         }

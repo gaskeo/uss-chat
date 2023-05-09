@@ -1,5 +1,6 @@
 import styles from "../styles/joinRow.module.css";
 import {Text} from "../../../kit";
+import {getTimeHHMM} from "../../../../utils";
 
 interface JoinRowProps {
     username: string;
@@ -10,7 +11,7 @@ interface JoinRowProps {
 export default function JoinRow({time, name}: JoinRowProps) {
     return (
         <div className={styles.joinRowContainer}>
-            <Text color="secondary">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
+            <Text color="secondary">{getTimeHHMM(new Date(Number(time)))}</Text>
             <Text>{name} присоединился к комнате</Text>
         </div>
     )
