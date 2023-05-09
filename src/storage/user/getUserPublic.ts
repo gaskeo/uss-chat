@@ -10,6 +10,7 @@ function getUserPublic(username: string): UserPublic | null {
     return {
         username: user.username,
         name: user.name,
+        color: user.color
     }
 }
 

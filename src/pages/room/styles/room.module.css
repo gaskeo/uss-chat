@@ -24,6 +24,15 @@
     justify-content: space-between;
 }
 
+.chatHeaderUserContainer {
+    display: flex;
+    align-items: center;
+}
+
+.chatHeaderUserContainer > * {
+    margin-left: -10px;
+}
+
 .chatContent {
     max-height: calc(100% - 105px);
     display: flex;

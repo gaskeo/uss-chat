@@ -13,6 +13,7 @@ interface MessageRowProps {
     replyMessage?: { name: string, id: string, message: string };
     myMessage?: boolean;
     onReply?: (id: string) => void;
+    color: string
 }
 
 export default function MessageRow({
@@ -22,7 +23,8 @@ export default function MessageRow({
                                        name,
                                        time,
                                        message,
-                                       myMessage
+                                       myMessage,
+                                       color
                                    }: MessageRowProps) {
     return (
         <div className={styles.messageContainer} onContextMenuCapture={e => {
@@ -30,7 +32,7 @@ export default function MessageRow({
             onReply && onReply(id);
         }}>
             <div className={`${styles.avatarContainer} ${myMessage ? styles.right : ""}`}>
-                <Avatar background="#888" foreground="#000" letter={name[0]}/>
+                <Avatar background={color} foreground="#000" letter={name[0]}/>
             </div>
             <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`}>
                 <div className={styles.messageHeader}>
@@ -45,8 +47,6 @@ export default function MessageRow({
                     </div>
                 }
                 <Text>{message}</Text>
-                <span onClick={() => onReply && onReply(id)} className={styles.replyText}><Text color="link"
-                                                                                                size="s">Ответить</Text></span>
             </div>
         </div>
     )

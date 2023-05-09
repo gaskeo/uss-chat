@@ -1,4 +1,4 @@
-import {generateSalt} from "../../utils";
+import {generateSalt, getRandomColor} from "../../utils";
 import sjcl from "sjcl";
 import {userExists} from "../user/userExists";
 import {AuthMessages} from "../messages/messages";
@@ -24,7 +24,8 @@ function register(user: User) {
         name: user.name,
         password: passwordHashed,
         salt: salt,
-        username: user.username
+        username: user.username,
+        color: getRandomColor()
     });
 
     localStorage.setItem(`user_${user.username}`, userJson);

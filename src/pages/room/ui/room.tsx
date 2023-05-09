@@ -3,9 +3,10 @@ import React, {useEffect, useRef, useState} from "react";
 import {addEvent, getAuthUser, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventMessage, EventTypes} from "../../../storage/models";
 import {JoinRow} from "../../../components";
-import {Button, Header, Input, Text} from "../../../components/kit";
+import {Avatar, Button, Header, Input, Text} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
 import RoomPopup from "../../../components/popups/roomPopup";
+import {getRandomColor} from "../../../utils";
 
 interface RoomProps {
     roomId: string;
@@ -52,7 +53,12 @@ export default function Room({roomId}: RoomProps) {
             <div className={styles.chatContainer}>
                 <div className={styles.chatHeader} onClick={() => updatePopupOpen(true)}>
                     <Header>{room?.name}</Header>
-                    <p>Участников: {room?.users?.length}</p>
+                    <div className={styles.chatHeaderUserContainer}>
+                        {room?.users.slice(0, 5).map(u => {
+                            const user = getUserPublic(u);
+                            return <Avatar background={user?.color || ""} foreground="000" letter={user?.name[0] || ""}/>
+                        })}
+                    </div>
                 </div>
                 <div className={styles.chatContent} ref={chatRef}>
                     {events.map(e => {
@@ -85,6 +91,7 @@ export default function Room({roomId}: RoomProps) {
                                     name={user?.name || ""}
                                     message={e.message}
                                     id={e.id}
+                                    color={user?.color || ""}
                                     replyMessage={{
                                         message: replyMessage?.message,
                                         name: getUserPublic(replyMessage?.user)?.name || "",

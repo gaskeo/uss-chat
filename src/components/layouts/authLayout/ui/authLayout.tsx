@@ -16,7 +16,7 @@ export default function AuthLayout({children}: AuthLayoutProps) {
             <header className={styles.header}>
                 <Header>Local Chat</Header>
                 <div className={styles.userContainer}>
-                    <Avatar background="#343434" foreground="#000" letter={user?.name[0] || ""}/>
+                    <Avatar background={user?.color || ""} foreground="#000" letter={user?.name[0] || ""}/>
                     <Text>{user?.name} |</Text>
                     <span onClick={() => {
                         logout();

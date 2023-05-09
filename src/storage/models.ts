@@ -2,12 +2,14 @@ export interface User {
     name: string,
     password: string,
     salt: string,
-    username: string
+    username: string,
+    color: string
 }
 
 export interface UserPublic {
     username: string,
     name: string
+    color: string
 }
 
 export interface Room {

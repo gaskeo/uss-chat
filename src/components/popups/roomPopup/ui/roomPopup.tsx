@@ -39,7 +39,7 @@ export default function RoomPopup({roomId, updateRoom, onClose}: RoomPopupProps)
                 <div className={styles.userRowContainer}>
                     {room?.users.map(u => {
                         const user = getUserPublic(u);
-                        return <div className={styles.userRow}><Avatar background="#888" foreground="#000" letter={user?.name[0] || ""}/><Text>{user?.name}</Text></div>
+                        return <div className={styles.userRow}><Avatar background={user?.color || ""} foreground="#000" letter={user?.name[0] || ""}/><Text>{user?.name}</Text></div>
                     })}
                 </div>
             </div>
