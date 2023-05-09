@@ -10,7 +10,8 @@ function addEvent(roomId: string, event: EventPublic) {
         return
     }
     const events = getRoomEvents(roomId);
-    if (events.length === 0 || !isDatesEqual(new Date(), new Date(events[events.length - 1].time.toString()))) {
+
+    if (events.length === 0 || !isDatesEqual(new Date(), new Date(Number(events[events.length - 1].time)))) {
         events.push({
             type: EventTypes.DATE,
             time: Number(new Date()).toString(),

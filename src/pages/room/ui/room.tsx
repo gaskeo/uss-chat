@@ -7,6 +7,7 @@ import {Avatar, Header} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
 import RoomPopup from "../../../components/popups/roomPopup";
 import {MessageInput} from "../../../components/messageInput";
+import DateRow from "../../../components/events/dateRow";
 
 interface RoomProps {
     roomId: string;
@@ -62,7 +63,7 @@ export default function Room({roomId}: RoomProps) {
                         let user;
                         switch (e.type) {
                             case EventTypes.DATE:
-                                return <div>{new Date(Number(e.time)).toLocaleDateString("ru-RU")}</div>
+                                return <DateRow key={e.id} time={e.time}/>
                             case EventTypes.JOIN:
                                 user = getUserPublic(e.user);
                                 return <JoinRow

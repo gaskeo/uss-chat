@@ -17,7 +17,6 @@ export default function Register() {
 
         const message = registerStorage({username, password, name});
         updateMessage(message);
-        console.log(message)
         if (message === AuthMessages.OK) {
             navigate("/login");
         }

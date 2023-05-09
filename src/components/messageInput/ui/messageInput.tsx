@@ -1,7 +1,6 @@
 import styles from "../../../pages/room/styles/room.module.css";
-import {EventTypes} from "../../../storage/models";
 import {Button, Input, Text} from "../../kit";
-import React, {RefObject, useRef} from "react";
+import React, {useRef} from "react";
 
 interface MessageInputProps {
     onSendMessage: (message: string, replyId: string | undefined) => void;
@@ -15,6 +14,7 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
         <form className={styles.inputContainer} onSubmit={e => {
             e.preventDefault();
             onSendMessage(inputRef?.current?.value || "", replyMessage?.id);
+            if (inputRef?.current) inputRef.current.value = "";
         }}>
             {replyMessage &&
                 <span>

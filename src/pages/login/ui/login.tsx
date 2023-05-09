@@ -1,9 +1,9 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/login.module.css";
-import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, register, selectRoom} from "../../../storage";
+import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, selectRoom} from "../../../storage";
 import {AuthMessages, messages, SystemMessages} from "../../../storage/messages/messages";
 import {Room, User} from "../../../storage/models";
-import {Link, redirect, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Button, Header, Input, Select, Text} from "../../../components/kit";
 
 interface LoginProps {
@@ -16,18 +16,15 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
         const password = passwordRef?.current?.value;
         const username = usernameRef?.current?.value;
         const roomId = roomRef?.current?.value;
-        console.log(roomRef?.current)
         if (!password || !username) return updateMessage(SystemMessages.FIELDS_NOT_FILL);
 
         const message = loginStorage({username: username, password: password});
         updateMessage(message);
         if (message === AuthMessages.OK) {
-            console.log(roomId)
             selectRoom(roomId !== "new" ? roomId : undefined);
             updateCurrentUser(getAuthUser());
             updateCurrentRoom(getCurrentRoom());
             navigate("/room")
-            console.log("redirect")
         }
     }
     const navigate = useNavigate();

@@ -4,7 +4,6 @@ function getRandomHex() {
 
 function getRandomColor() {
     const [r, g, b] = [getRandomHex(), getRandomHex(), getRandomHex()];
-    console.log(r, g, b)
     return `#${r}${g}${b}`
 }
 
