@@ -12,9 +12,9 @@ export default function Button({children, type, color}: ButtonProps) {
         switch (color) {
             case undefined:
             case "default":
-                return {backgroundColor: "#000"};
+                return {backgroundColor: "var(--color-dominant)"};
             case "success":
-                return {backgroundColor: "#45f248"};
+                return {backgroundColor: "var(--color-accent-400)"};
         }
     }
     return (

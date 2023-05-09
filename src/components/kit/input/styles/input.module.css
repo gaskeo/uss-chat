@@ -20,5 +20,5 @@
 }
 
 .input:focus-visible {
-    background-color: #eee;
+    background-color: var(--color-secondary-100);
 }

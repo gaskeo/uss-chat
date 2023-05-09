@@ -4,7 +4,7 @@
     flex-direction: column;
     padding: 10px;
     box-sizing: border-box;
-    background-color: #effdde;
+    background-color: var(--color-accent-300);
     width: max-content;
     border-radius: 10px;
     margin-left: 50px;
@@ -16,7 +16,7 @@
 .myMessage {
     margin-left: auto;
     align-self: end;
-    background-color: #fff;
+    background-color: var(--color-dominant);
     margin-right: 50px;
 }
 
@@ -50,7 +50,7 @@
     width: 4px;
     border-radius: 2px;
     height: 100%;
-    background-color: #61dafb;
+    background-color: var(--color-link-300);
 }
 .messageContainer {
     position: relative;

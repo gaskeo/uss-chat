@@ -8,7 +8,7 @@
 .chatContainer {
     position: relative;
     border-radius: 5px;
-    background-color: #8cb987;
+    background-color: var(--color-accent-500);
     width: 90vw;
     max-width: 800px;
     flex-direction: column;

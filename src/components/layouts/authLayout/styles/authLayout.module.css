@@ -13,14 +13,3 @@
     align-items: center;
     cursor: pointer;
 }
-
-.avatar {
-    width: 30px;
-    height: 30px;
-    background-color: #61dafb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-family: 'Mulish', sans-serif;
-}

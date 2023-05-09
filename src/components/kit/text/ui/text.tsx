@@ -12,15 +12,15 @@ export default function Text({size, children, color}: TextProps) {
         switch (color) {
             case undefined:
             case "dominant":
-                return {color: "#000"};
+                return {color: "var(--color-secondary-1000)"};
             case "secondary":
-                return {color: "#999"};
+                return {color: "var(--color-secondary-800)"};
             case "link":
-                return {color: "#5196ba"}
+                return {color: "var(--color-link-500)"}
             case "accent":
-                return {color: "#f5a55b"}
+                return {color: "var(--color-accent-700)"}
             case "invert":
-                return {color: "#fff"}
+                return {color: "var(--color-dominant)"}
         }
     }
 
@@ -35,5 +35,6 @@ export default function Text({size, children, color}: TextProps) {
                 return {fontSize: "14px"}
         }
     }
+
     return <p className={styles.text} style={{...getColor(), ...getSize()}}>{children}</p>
 }

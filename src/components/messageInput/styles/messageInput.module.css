@@ -5,7 +5,7 @@
     left: 0;
     bottom: 0;
     gap: 5px;
-    background-color: #578d51;
+    background-color: var(--color-accent-700);
     box-sizing: border-box;
     margin-bottom: 0;
     display: flex;
@@ -45,7 +45,7 @@
     position: absolute;
     content: "";
     display: block;
-    background-color: #61dafb;
+    background-color: var(--color-link-300);
 }
 
 .closeButton {
@@ -60,7 +60,7 @@
     position: absolute;
     display: block;
     content: "";
-    background-color: #fff;
+    background-color: var(--color-dominant);
     width: 20px;
     height: 4px;
     top: 8px;
@@ -73,7 +73,7 @@
     position: absolute;
     display: block;
     content: "";
-    background-color: #fff;
+    background-color: var(--color-dominant);
     width: 4px;
     height: 20px;
 }

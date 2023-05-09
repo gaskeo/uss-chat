@@ -9,7 +9,7 @@
 .loginForm {
     border-radius: 10px;
     padding: 20px;
-    background-color: #8cb987;
+    background-color: var(--color-accent-500);
     width: 90vw;
     max-width: 300px;
     display: flex;
