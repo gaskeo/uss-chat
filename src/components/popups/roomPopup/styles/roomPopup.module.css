@@ -43,3 +43,15 @@
 .roomPopupContainer > form > button {
     width: max-content;
 }
+
+.userRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.userRowContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

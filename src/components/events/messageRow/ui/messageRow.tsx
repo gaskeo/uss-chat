@@ -1,5 +1,5 @@
 import styles from "../styles/messageRow.module.css";
-import {Text} from "../../../kit";
+import {Avatar, Text} from "../../../kit";
 
 interface MessageRowProps {
     id: string
@@ -18,27 +18,32 @@ export default function MessageRow({
                                        replyMessage,
                                        id,
                                        onReply,
-                                       username,
                                        name,
                                        time,
                                        message,
                                        myMessage
                                    }: MessageRowProps) {
     return (
-        <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`} data-avatar={name[0]}>
-            <div className={styles.messageHeader}>
-                <Text color="accent">{name}</Text>
-                <Text color="secondary" size="s">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
+        <div className={styles.messageContainer}>
+            <div className={`${styles.avatarContainer} ${myMessage ? styles.right : ""}`}>
+                <Avatar background="#888" foreground="#000" letter={name[0]}/>
             </div>
-
-            {replyMessage &&
-                <div className={styles.reply}>
-                    <Text size="s" color="secondary">{replyMessage.name}</Text>
-                    <Text size="s" color="secondary">{replyMessage.message}</Text>
+            <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`}>
+                <div className={styles.messageHeader}>
+                    <Text color="accent">{name}</Text>
+                    <Text color="secondary" size="s">{new Date(Number(time)).toLocaleString("ru-RU")}</Text>
                 </div>
-            }
-            <Text>{message}</Text>
-            <span onClick={() => onReply && onReply(id)} className={styles.replyText}><Text color="link" size="s">Ответить</Text></span>
+
+                {replyMessage &&
+                    <div className={styles.reply}>
+                        <Text size="s" color="secondary">{replyMessage.name}</Text>
+                        <Text size="s" color="secondary">{replyMessage.message}</Text>
+                    </div>
+                }
+                <Text>{message}</Text>
+                <span onClick={() => onReply && onReply(id)} className={styles.replyText}><Text color="link"
+                                                                                                size="s">Ответить</Text></span>
+            </div>
         </div>
     )
 }

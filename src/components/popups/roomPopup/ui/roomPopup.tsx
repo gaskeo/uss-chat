@@ -1,6 +1,6 @@
 import {getRoom, getUserPublic, setName} from "../../../../storage";
 import styles from "../styles/roomPopup.module.css";
-import {Button, Header, Input, Text} from "../../../kit";
+import {Avatar, Button, Header, Input, Text} from "../../../kit";
 import React, {useRef} from "react";
 import {Room} from "../../../../storage/models";
 
@@ -36,10 +36,10 @@ export default function RoomPopup({roomId, updateRoom, onClose}: RoomPopupProps)
                     <Button color="success" type="submit">Изменить</Button>
                 </form>
                 <Header>Участники</Header>
-                <div>
+                <div className={styles.userRowContainer}>
                     {room?.users.map(u => {
                         const user = getUserPublic(u);
-                        return <Text>{user?.name}</Text>
+                        return <div className={styles.userRow}><Avatar background="#888" foreground="#000" letter={user?.name[0] || ""}/><Text>{user?.name}</Text></div>
                     })}
                 </div>
             </div>

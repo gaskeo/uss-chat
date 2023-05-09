@@ -1,8 +1,7 @@
 import React from "react";
-import {Header, Text} from "../../../kit";
-import {getAuthUser} from "../../../../storage";
+import {Avatar, Header, Text} from "../../../kit";
+import {getAuthUser, logout} from "../../../../storage";
 import styles from "../styles/authLayout.module.css";
-import {logout} from "../../../../storage/auth/logout";
 import {useNavigate} from "react-router-dom";
 
 interface AuthLayoutProps {
@@ -17,7 +16,7 @@ export default function AuthLayout({children}: AuthLayoutProps) {
             <header className={styles.header}>
                 <Header>Local Chat</Header>
                 <div className={styles.userContainer}>
-                    <div className={styles.avatar}>{user?.name[0]}</div>
+                    <Avatar background="#343434" foreground="#000" letter={user?.name[0] || ""}/>
                     <Text>{user?.name} |</Text>
                     <span onClick={() => {
                         logout();
