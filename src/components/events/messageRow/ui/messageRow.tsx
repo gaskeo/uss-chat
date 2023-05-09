@@ -40,7 +40,7 @@ export default function MessageRow({
                     <Text color="secondary" size="s">{getTimeHHMM(new Date(Number(time)))}</Text>
                 </div>
 
-                {replyMessage &&
+                {replyMessage?.message &&
                     <div className={styles.reply}>
                         <Text size="s" color="secondary">{replyMessage.name}</Text>
                         <Text size="s" color="secondary">{replyMessage.message}</Text>

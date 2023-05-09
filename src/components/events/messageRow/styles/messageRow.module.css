@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 5px;
     padding: 10px;
     box-sizing: border-box;
     background-color: #effdde;
@@ -34,6 +33,8 @@
 }
 
 .reply {
+    margin-bottom: 2px;
+    margin-top: 2px;
     margin-left: 8px;
     position: relative;
 }
@@ -47,6 +48,7 @@
     display: block;
     content: "";
     width: 4px;
+    border-radius: 2px;
     height: 100%;
     background-color: #61dafb;
 }
@@ -63,11 +65,4 @@
 .right {
     left: unset;
     right: 10px;
-}
-
-.contextMenu {
-    width: 120px;
-    height: 60px;
-    background-color: black;
-    position: absolute;
 }

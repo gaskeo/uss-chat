@@ -1,4 +1,4 @@
-import styles from "../../../pages/room/styles/room.module.css";
+import styles from "../styles/messageInput.module.css";
 import {Button, Input, Text} from "../../kit";
 import React, {useRef} from "react";
 
@@ -6,6 +6,18 @@ interface MessageInputProps {
     onSendMessage: (message: string, replyId: string | undefined) => void;
     replyMessage: { user: string, message: string, id: string } | undefined
     onCancelReplyMessage: () => void;
+}
+
+function ReplyMessage({message, user, onCancel}: { message: string, user: string, onCancel: () => void }) {
+    return (
+        <div className={styles.replyMessageContainer}>
+            <div className={styles.replyMessage}>
+                <Text color="invert" size="s">{user}</Text>
+                <Text color="invert" size="s">{message}</Text>
+            </div>
+            <div className={styles.closeButton} onClick={onCancel}/>
+        </div>
+    )
 }
 
 export default function MessageInput({onSendMessage, replyMessage, onCancelReplyMessage}: MessageInputProps) {
@@ -17,12 +29,10 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
             if (inputRef?.current) inputRef.current.value = "";
         }}>
             {replyMessage &&
-                <span>
-                            <Text color="invert">{replyMessage.user}: {replyMessage.message}</Text>
-                            <div onClick={() => onCancelReplyMessage()}><Text color="invert">Отменить</Text></div>
-                        </span>
+                <ReplyMessage message={replyMessage.message} user={replyMessage.user} onCancel={onCancelReplyMessage}/>
+
             }
-            <div>
+            <div className={styles.input}>
                 <Input inputRef={inputRef}/>
                 <Button color="success" type="submit">отправить</Button>
             </div>
