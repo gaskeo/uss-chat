@@ -16,7 +16,7 @@ export default function Text({size, children, color}: TextProps) {
             case "secondary":
                 return {color: "var(--color-secondary-800)"};
             case "link":
-                return {color: "var(--color-link-500)"}
+                return {color: "var(--color-accent-100)"}
             case "accent":
                 return {color: "var(--color-accent-700)"}
             case "invert":

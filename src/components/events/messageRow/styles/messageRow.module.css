@@ -16,7 +16,7 @@
 .myMessage {
     margin-left: auto;
     align-self: end;
-    background-color: var(--color-dominant);
+    background-color: var(--color-accent-400);
     margin-right: 50px;
 }
 
@@ -51,7 +51,7 @@
     width: 4px;
     border-radius: 2px;
     height: 100%;
-    background-color: var(--color-link-500);
+    background-color: var(--color-accent-100);
 }
 
 .messageContainer {

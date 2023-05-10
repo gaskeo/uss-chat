@@ -15,8 +15,8 @@ function ReplyMessage({message, user, onCancel}: { message: string, user: string
     return (
         <div className={styles.replyMessageContainer}>
             <div className={styles.replyMessage}>
-                <Text color="invert" size="s">{user}</Text>
-                <Text color="invert" size="s">{message}</Text>
+                <Text color="link" size="s">{user}</Text>
+                <Text color="secondary" size="s">{message}</Text>
             </div>
             <div className={styles.closeButton} onClick={onCancel}/>
         </div>

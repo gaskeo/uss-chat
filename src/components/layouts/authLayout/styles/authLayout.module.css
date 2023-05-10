@@ -15,10 +15,14 @@
 
 .exit {
     cursor: pointer;
-    height: 30px;
+    height: 20px;
     display: block;
     width: 30px;
     transition: .3s all;
+}
+
+.exit > svg {
+    height: 20px;
 }
 
 .exit:hover {

@@ -37,10 +37,11 @@
     cursor: pointer;
     height: 30px;
     width: 30px;
-    background-color: var(--color-link-500);
+    background-color: var(--color-accent-500);
     display: flex;
     justify-content: center;
     padding: 3px;
+    box-sizing: border-box;
     border-radius: 50%;
     transform-origin: center;
     margin-top: 5px;
@@ -49,11 +50,12 @@
 }
 
 .chatHeaderNameSection > div:hover {
-    background-color: var(--color-secondary-800);
+    background-color: var(--color-accent-300);
 }
 
 .chatHeaderNameSection > div > svg {
-    height: 30px;
+    height: 24px;
+    fill: var(--color-secondary-1000);
 }
 
 .chatHeaderUserContainer {

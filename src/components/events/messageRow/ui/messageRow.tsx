@@ -51,7 +51,7 @@ export default function MessageRow({
             </div>
             <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`}>
                 <div className={styles.messageHeader}>
-                    <Text color="accent">{name}</Text>
+                    <Text color="dominant">{name}</Text>
                     <Text color="secondary" size="s">{getTimeHHMM(new Date(Number(time)))}</Text>
                 </div>
                 {

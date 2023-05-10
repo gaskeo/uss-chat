@@ -7,4 +7,5 @@
     border: none;
     outline: none;
     border-radius: 5px;
+    color: var(--color-secondary-1000);
 }

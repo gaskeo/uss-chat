@@ -59,7 +59,7 @@ export default function Register() {
 
                     {message !== AuthMessages.OK && <Text>{messages[message]}</Text>}
                     <Button type="submit" color="success">Зарегистрироваться</Button>
-                    <Text><Link to={"/login"}>Уже есть аккаунт</Link></Text>
+                    <Link to="/login"><Text color="secondary">У меня уже есть аккаунт</Text></Link>
                 </form>
             </div>
         </div>

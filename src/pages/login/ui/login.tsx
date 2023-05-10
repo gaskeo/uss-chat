@@ -51,7 +51,7 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
                     />
                     {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
                     <Button type="submit" color="success">Войти</Button>
-                    <Text><Link to={"/register"}>Ещё нет аккаунта</Link></Text>
+                    <Link to="/register"><Text color="secondary">Ещё нет аккаунта</Text></Link>
                 </form>
             </div>
         </div>

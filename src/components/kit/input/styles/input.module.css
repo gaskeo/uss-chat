@@ -7,6 +7,8 @@
 }
 
 .input {
+    background-color: var(--color-accent-200);
+    color: var(--color-secondary-1000);
     width: 100%;
     box-sizing: border-box;
     height: 35px;
@@ -20,5 +22,5 @@
 }
 
 .input:focus-visible {
-    background-color: var(--color-secondary-100);
+    background-color: var(--color-accent-300);
 }

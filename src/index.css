@@ -8,6 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
+  background-color: var(--color-accent-800);
 }
 
 code {
@@ -15,16 +16,22 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
 :root {
-  --color-dominant: #FFFFFF;
-  --color-secondary-1000: #000000;
-  --color-secondary-800: #999999;
+  --color-dominant: #000;
+  --color-secondary-1000: #fff;
+  --color-secondary-800: #a9d6e5;
   --color-secondary-100: #EEEEEE;
-  --color-accent-700: #578D51;
-  --color-accent-500: #8CB987;
-  --color-accent-400: #45F248;
-  --color-accent-300: #EFFDDE;
-  --color-accent-200: #DFFFE0;
+  --color-accent-800: #012038;
+  --color-accent-700: #012a4a;
+  --color-accent-500: #013a63;
+  --color-accent-400: #01497c;
+  --color-accent-300: #2a6f97;
+  --color-accent-200: #2c7da0;
+  --color-accent-100: #89c2d9;
   --color-link-500: #5196BA;
   --color-link-300: #61DAFB;
 }

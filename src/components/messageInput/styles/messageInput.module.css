@@ -27,13 +27,13 @@
     display: block;
     position: relative;
     height: 35px;
-    fill: var(--color-dominant);
+    fill: var(--color-accent-200);
     aspect-ratio: 1 / 1;
     transition: all .3s;
 }
 
 .fileInput:hover svg {
-    fill: var(--color-accent-400)
+    fill: var(--color-accent-300)
 }
 
 .fileInput > input {
@@ -51,14 +51,14 @@
 .sendButton {
     cursor: pointer;
     margin: auto;
-    fill: var(--color-dominant);
+    fill: var(--color-accent-200);
     display: flex;
     align-items: center;
     transition: .3s all;
 }
 
 .sendButton:hover {
-    fill: var(--color-accent-400)
+    fill: var(--color-accent-300)
 }
 
 .sendButton * {
@@ -87,7 +87,7 @@
     position: absolute;
     content: "";
     display: block;
-    background-color: var(--color-link-500);
+    background-color: var(--color-accent-100);
 }
 
 .closeButton {
