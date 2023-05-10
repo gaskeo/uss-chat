@@ -54,10 +54,13 @@ export default function MessageRow({
                     <Text color="accent">{name}</Text>
                     <Text color="secondary" size="s">{getTimeHHMM(new Date(Number(time)))}</Text>
                 </div>
-                <div ref={imgContainerRef}>
-                    {media && media.map((name, index) => (
-                        <img key={name} alt="" className={styles.image}/>))}
-                </div>
+                {
+                    media &&
+                    <div ref={imgContainerRef} className={styles.imageContainer} data-items={media.length}>
+                        {media.map((name) => (
+                            <img key={name} alt="" className={styles.image}/>))}
+                    </div>
+                }
                 {replyMessage?.message &&
                     <div className={styles.reply}>
                         <Text size="s" color="secondary">{replyMessage.name}</Text>

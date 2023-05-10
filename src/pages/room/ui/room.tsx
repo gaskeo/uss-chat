@@ -8,7 +8,7 @@ import MessageRow from "../../../components/events/messageRow";
 import RoomPopup from "../../../components/popups/roomPopup";
 import {MessageInput} from "../../../components/messageInput";
 import DateRow from "../../../components/events/dateRow";
-import {init, loadImage} from "../../../storage/media/save";
+import {loadImage} from "../../../storage/media/save";
 
 interface RoomProps {
     roomId: string;
@@ -27,10 +27,10 @@ export default function Room({roomId}: RoomProps) {
         }
         const media: string[] = [];
         if (files) {
-            const fileNames = await Promise.all(files.map(file => loadImage(file)));
+            const fileNames = await Promise.all(files.slice(0, 5).map(file => loadImage(file)));
             media.push(...fileNames)
         }
-        console.log(media)
+
         addEvent(roomId, {
             type: EventTypes.MESSAGE,
             message,
