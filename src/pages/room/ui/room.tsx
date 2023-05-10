@@ -9,6 +9,7 @@ import RoomPopup from "../../../components/popups/roomPopup";
 import {MessageInput} from "../../../components/messageInput";
 import DateRow from "../../../components/events/dateRow";
 import {loadImage} from "../../../storage/media/save";
+import {Dots} from "../../../components/kit/icons";
 
 interface RoomProps {
     roomId: string;
@@ -55,12 +56,16 @@ export default function Room({roomId}: RoomProps) {
         <div className={styles.roomContainer}>
             {popupOpen && <RoomPopup roomId={roomId} updateRoom={updateRoom} onClose={() => updatePopupOpen(false)}/>}
             <div className={styles.chatContainer}>
-                <div className={styles.chatHeader} onClick={() => updatePopupOpen(true)}>
-                    <Header>{room?.name}</Header>
+                <div className={styles.chatHeader}>
+                    <div className={styles.chatHeaderNameSection}>
+                        <Header>{room?.name}</Header>
+                        <div onClick={() => updatePopupOpen(true)}><Dots/></div>
+                    </div>
                     <div className={styles.chatHeaderUserContainer}>
                         {room?.users.slice(0, 5).map(u => {
                             const user = getUserPublic(u);
-                            return <Avatar key={user?.username} background={user?.color || ""} foreground="000" letter={user?.name[0] || ""}/>
+                            return <Avatar key={user?.username} background={user?.color || ""} foreground="000"
+                                           letter={user?.name[0] || ""}/>
                         })}
                     </div>
                 </div>
@@ -73,11 +78,11 @@ export default function Room({roomId}: RoomProps) {
                             case EventTypes.JOIN:
                                 user = getUserPublic(e.user);
                                 return <JoinRow
-                                        key={e.time + e.type}
-                                        time={e.time}
-                                        username={e.user}
-                                        name={user?.name || ""}
-                                    />
+                                    key={e.time + e.type}
+                                    time={e.time}
+                                    username={e.user}
+                                    name={user?.name || ""}
+                                />
                             case EventTypes.MESSAGE:
                                 user = getUserPublic(e.user);
                                 const replyMessage = events.filter(message => (message.type === EventTypes.MESSAGE && message.id === e.replyId))[0] as EventMessage;
@@ -104,11 +109,11 @@ export default function Room({roomId}: RoomProps) {
                         }
                     })}
                 </div>
-            <MessageInput
-                onSendMessage={sendMessage}
-                replyMessage={replyMessage as EventMessage}
-                onCancelReplyMessage={() => updateReplyMessageId("")}
-            />
+                <MessageInput
+                    onSendMessage={sendMessage}
+                    replyMessage={replyMessage as EventMessage}
+                    onCancelReplyMessage={() => updateReplyMessageId("")}
+                />
 
             </div>
         </div>

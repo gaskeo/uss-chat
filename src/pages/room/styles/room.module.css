@@ -27,6 +27,35 @@
     background-color: var(--color-accent-700);
 }
 
+.chatHeaderNameSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chatHeaderNameSection > div {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    background-color: var(--color-link-500);
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 50%;
+    transform-origin: center;
+    margin-top: 5px;
+    transform: rotate(90deg);
+    transition: .3s all;
+}
+
+.chatHeaderNameSection > div:hover {
+    background-color: var(--color-secondary-800);
+}
+
+.chatHeaderNameSection > div > svg {
+    height: 30px;
+}
+
 .chatHeaderUserContainer {
     display: flex;
     align-items: center;
