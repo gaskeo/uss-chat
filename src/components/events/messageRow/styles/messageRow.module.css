@@ -51,7 +51,7 @@
     width: 4px;
     border-radius: 2px;
     height: 100%;
-    background-color: var(--color-link-300);
+    background-color: var(--color-link-500);
 }
 
 .messageContainer {

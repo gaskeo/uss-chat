@@ -63,7 +63,7 @@ export default function MessageRow({
                 }
                 {replyMessage?.message &&
                     <div className={styles.reply}>
-                        <Text size="s" color="secondary">{replyMessage.name}</Text>
+                        <Text size="s" color="link">{replyMessage.name}</Text>
                         <Text size="s" color="secondary">{replyMessage.message}</Text>
                     </div>
                 }

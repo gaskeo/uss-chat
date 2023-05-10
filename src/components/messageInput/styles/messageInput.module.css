@@ -19,8 +19,50 @@
     gap: 5px;
 }
 
+.fileInput {
+    cursor: pointer;
+}
+
+.fileInput > svg {
+    display: block;
+    position: relative;
+    height: 35px;
+    fill: var(--color-dominant);
+    aspect-ratio: 1 / 1;
+    transition: all .3s;
+}
+
+.fileInput:hover svg {
+    fill: var(--color-accent-400)
+}
+
+.fileInput > input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
 .inputContainer button {
     width: max-content;
+}
+
+.sendButton {
+    cursor: pointer;
+    margin: auto;
+    fill: var(--color-dominant);
+    display: flex;
+    align-items: center;
+    transition: .3s all;
+}
+
+.sendButton:hover {
+    fill: var(--color-accent-400)
+}
+
+.sendButton * {
+    height: 35px;
 }
 
 .replyMessageContainer {
@@ -45,7 +87,7 @@
     position: absolute;
     content: "";
     display: block;
-    background-color: var(--color-link-300);
+    background-color: var(--color-link-500);
 }
 
 .closeButton {
@@ -76,4 +118,71 @@
     background-color: var(--color-dominant);
     width: 4px;
     height: 20px;
+}
+
+.selectedFilesContainer {
+    display: grid;
+    height: 100px;
+    max-width: 500px;
+    gap: 5px;
+    overflow: hidden;
+    grid-template-columns: repeat(5, 1fr);
+    position: relative;
+}
+
+.selectedFilesContainer img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.selectedFilesContainer > div {
+    cursor: pointer;
+    position: relative;
+    height: 100px;
+}
+
+.selectedFilesContainer > div:after, .selectedFilesContainer > div:before {
+    transition: .3s all;
+}
+
+.selectedFilesContainer > div:after {
+    pointer-events: none;
+    top: 0;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-secondary-1000);
+    opacity: 0;
+}
+
+.selectedFilesContainer > div:hover:after {
+    opacity: .3;
+}
+
+.selectedFilesContainer > div:before {
+    pointer-events: none;
+    z-index: 2;
+    content: "Удалить";
+    position: absolute;
+    display: block;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
+    padding: 5px;
+    background-color: var(--color-dominant);
+    border-radius: 5px;
+    opacity: 0;
+}
+
+.selectedFilesContainer > div:hover:before {
+    opacity: 1;
 }
