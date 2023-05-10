@@ -81,7 +81,10 @@
 .imageContainer {
     overflow: hidden;
     display: grid;
+    margin-top: 5px;
+    margin-bottom: 5px;
     gap: 5px;
+    grid-template-rows: repeat(auto-fill, 1fr);
 }
 
 .imageContainer[data-items="1"] {
@@ -115,4 +118,9 @@
 .imageContainer[data-items="5"] > *:first-child {
     grid-column-start: 1;
     grid-column-end: 5;
+}
+
+.imageContainer > img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
