@@ -2,7 +2,8 @@ import styles from "../styles/messageRow.module.css";
 import {Avatar, Text} from "../../../kit";
 import {getTimeHHMM} from "../../../../utils";
 import {getImage} from "../../../../storage/media/save";
-import {useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
+import {ImagePopup} from "../../../popups/imagePopup";
 
 interface MessageRowProps {
     id: string
@@ -15,6 +16,7 @@ interface MessageRowProps {
     myMessage?: boolean;
     onReply?: (id: string) => void;
     color: string
+    updateImagePopup: (r: React.ReactNode) => void;
 }
 
 export default function MessageRow({
@@ -26,7 +28,8 @@ export default function MessageRow({
                                        message,
                                        myMessage,
                                        color,
-                                       media
+                                       media,
+                                       updateImagePopup
                                    }: MessageRowProps) {
     const imgContainerRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -36,6 +39,7 @@ export default function MessageRow({
                         const ref: HTMLImageElement = imgContainerRef.current.children[index] as HTMLImageElement;
                         if (ref) {
                             ref.src = content || "";
+                            ref.onclick = () => updateImagePopup(<ImagePopup onClose={() => updateImagePopup(null)} src={content || ""}/>)
                         }
                     }
                 })

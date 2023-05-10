@@ -48,12 +48,14 @@ export default function Room({roomId}: RoomProps) {
     const [replyMessageId, updateReplyMessageId] = useState("");
     const replyMessage = events.filter(e => (e.type === EventTypes.MESSAGE && e.id === replyMessageId))[0];
     const [popupOpen, updatePopupOpen] = useState(false);
+    const [imagePopup, updateImagePopup] = useState<React.ReactNode>(null);
 
     useEffect(() => {
         chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
     }, [events])
     return (
         <div className={styles.roomContainer}>
+            {imagePopup}
             {popupOpen && <RoomPopup roomId={roomId} updateRoom={updateRoom} onClose={() => updatePopupOpen(false)}/>}
             <div className={styles.chatContainer}>
                 <div className={styles.chatHeader}>
@@ -94,6 +96,7 @@ export default function Room({roomId}: RoomProps) {
                                     message={e.message}
                                     media={e.media}
                                     id={e.id}
+                                    updateImagePopup={updateImagePopup}
                                     color={user?.color || ""}
                                     replyMessage={{
                                         message: replyMessage?.message,
