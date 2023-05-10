@@ -6,10 +6,11 @@ interface TextareaProps {
     value?: string;
     inputRef: RefObject<HTMLTextAreaElement>;
     label?: string;
-    onSubmit?: () => void
+    onSubmit?: () => void;
+    placeholder?: string;
 }
 
-export default function Textarea({value, inputRef, label, onSubmit}: TextareaProps) {
+export default function Textarea({value, placeholder, inputRef, label, onSubmit}: TextareaProps) {
     const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if(e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -21,6 +22,7 @@ export default function Textarea({value, inputRef, label, onSubmit}: TextareaPro
         <label className={styles.inputContainer}>
             {label && <Text>{label}</Text>}
             <textarea
+                placeholder={placeholder}
                 onKeyDown={onEnterPress}
                 className={styles.input}
                 ref={inputRef}
