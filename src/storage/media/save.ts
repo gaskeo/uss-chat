@@ -30,7 +30,6 @@ async function loadImage(image: File): Promise<string> {
                 const db = request.result;
                 const transaction = db.transaction("images", "readwrite");
                 const store = transaction.objectStore("images");
-                console.log(fileName, reader.result)
                 const putRequest = store.put({id: fileName, data: reader.result});
                 putRequest.onsuccess = () => resolve(fileName);
             }
@@ -40,10 +39,7 @@ async function loadImage(image: File): Promise<string> {
 }
 
 async function getImage(name: string): Promise<string | undefined> {
-    console.log(name)
-
     const request = indexedDB.open("localChat",  3);
-    console.log(name)
 
     request.onerror = (event) => {
         console.log(event);

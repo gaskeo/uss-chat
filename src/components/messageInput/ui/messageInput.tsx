@@ -1,9 +1,10 @@
 import styles from "../styles/messageInput.module.css";
-import {Input, Text} from "../../kit";
+import {Button, Input, Text} from "../../kit";
 import React, {useRef, useState} from "react";
 import {Send} from "../../kit/icons";
 import {Attach} from "../../kit/icons";
 import {loadImagePreview} from "../../../utils";
+import {Textarea} from "../../kit/textarea";
 
 interface MessageInputProps {
     onSendMessage: (message: string, replyId: string | undefined, files: File[] | undefined) => void;
@@ -34,32 +35,34 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
         }
     }
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    function submit() {
+        const files = selectedFiles.map(f => f.file);
+        onSendMessage(inputRef?.current?.value || "", replyMessage?.id, files?.length ? Array.from(files) : undefined);
+        if (inputRef?.current) inputRef.current.value = "";
+        if (fileRef?.current) fileRef.current.files = null;
+        updateSelectedFiles([]);
+    }
+
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);
 
     const [selectedFiles, updateSelectedFiles] = useState<{ file: File, src: string }[]>([]);
-
     return (
         <form className={styles.inputContainer} onSubmit={e => {
             e.preventDefault();
-            const files = selectedFiles.map(f => f.file);
-            onSendMessage(inputRef?.current?.value || "", replyMessage?.id, files?.length ? Array.from(files) : undefined);
-            if (inputRef?.current) inputRef.current.value = "";
-            if (fileRef?.current) fileRef.current.files = null;
-            updateSelectedFiles([]);
+            submit();
         }}>
             {replyMessage &&
                 <ReplyMessage message={replyMessage.message} user={replyMessage.user} onCancel={onCancelReplyMessage}/>
-
             }
             <div className={styles.input}>
-                <Input inputRef={inputRef}/>
+                <Textarea inputRef={inputRef} onSubmit={submit}/>
                 <label className={styles.fileInput}>
                     <Attach/>
                     <input type="file" ref={fileRef} multiple onInput={loadPreviews}/>
                 </label>
                 <div className={styles.sendButton}>
-                    <Send/>
+                    <Button type="submit"><Send/></Button>
                 </div>
             </div>
             {

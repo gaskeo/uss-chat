@@ -51,7 +51,7 @@ export default function MessageRow({
             </div>
             <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`}>
                 <div className={styles.messageHeader}>
-                    <Text color="dominant">{name}</Text>
+                    <Text color="link">{name}</Text>
                     <Text color="secondary" size="s">{getTimeHHMM(new Date(Number(time)))}</Text>
                 </div>
                 {
@@ -67,7 +67,7 @@ export default function MessageRow({
                         <Text size="s" color="secondary">{replyMessage.message}</Text>
                     </div>
                 }
-                <Text>{message}</Text>
+                <Text pre>{message}</Text>
             </div>
         </div>
     )

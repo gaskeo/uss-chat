@@ -4,10 +4,11 @@ import styles from "../styles/text.module.css";
 interface TextProps {
     children: React.ReactNode;
     color?: "dominant" | "secondary" | "link" | "accent" | "invert"
-    size?: "s" | "m" | "l"
+    size?: "s" | "m" | "l";
+    pre?: boolean;
 }
 
-export default function Text({size, children, color}: TextProps) {
+export default function Text({size, children, color, pre}: TextProps) {
     function getColor() {
         switch (color) {
             case undefined:
@@ -36,5 +37,11 @@ export default function Text({size, children, color}: TextProps) {
         }
     }
 
-    return <p className={styles.text} style={{...getColor(), ...getSize()}}>{children}</p>
+    function getPre(): {whiteSpace: "pre"} | {} {
+        if (pre) {
+            return {whiteSpace: "pre-wrap"};
+        }
+        return {};
+    }
+    return <p className={styles.text} style={{...getColor(), ...getSize(), ...getPre()}}>{children}</p>
 }
