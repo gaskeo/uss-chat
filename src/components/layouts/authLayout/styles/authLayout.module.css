@@ -11,5 +11,16 @@
     display: flex;
     gap: 5px;
     align-items: center;
+}
+
+.exit {
     cursor: pointer;
+    height: 30px;
+    display: block;
+    width: 30px;
+    transition: .3s all;
+}
+
+.exit:hover {
+    transform: rotateY(30deg);
 }
