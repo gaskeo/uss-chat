@@ -3,7 +3,7 @@ import {Button, Input, Text} from "../../kit";
 import React, {useRef} from "react";
 
 interface MessageInputProps {
-    onSendMessage: (message: string, replyId: string | undefined) => void;
+    onSendMessage: (message: string, replyId: string | undefined, files: File[] | undefined) => void;
     replyMessage: { user: string, message: string, id: string } | undefined
     onCancelReplyMessage: () => void;
 }
@@ -22,11 +22,14 @@ function ReplyMessage({message, user, onCancel}: { message: string, user: string
 
 export default function MessageInput({onSendMessage, replyMessage, onCancelReplyMessage}: MessageInputProps) {
     const inputRef = useRef<HTMLInputElement>(null);
+    const fileRef = useRef<HTMLInputElement>(null);
     return (
         <form className={styles.inputContainer} onSubmit={e => {
             e.preventDefault();
-            onSendMessage(inputRef?.current?.value || "", replyMessage?.id);
+            const files = fileRef?.current?.files;
+            onSendMessage(inputRef?.current?.value || "", replyMessage?.id, files?.length ? Array.from(files) : undefined);
             if (inputRef?.current) inputRef.current.value = "";
+            if (fileRef?.current) fileRef.current.files = null;
         }}>
             {replyMessage &&
                 <ReplyMessage message={replyMessage.message} user={replyMessage.user} onCancel={onCancelReplyMessage}/>
@@ -34,6 +37,7 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
             }
             <div className={styles.input}>
                 <Input inputRef={inputRef}/>
+                <input type="file" ref={fileRef} multiple/>
                 <Button color="success" type="submit">отправить</Button>
             </div>
         </form>

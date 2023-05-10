@@ -1,7 +1,8 @@
 import styles from "../styles/messageRow.module.css";
 import {Avatar, Text} from "../../../kit";
 import {getTimeHHMM} from "../../../../utils";
-import {useState} from "react";
+import {getImage} from "../../../../storage/media/save";
+import {useEffect, useRef} from "react";
 
 interface MessageRowProps {
     id: string
@@ -24,8 +25,22 @@ export default function MessageRow({
                                        time,
                                        message,
                                        myMessage,
-                                       color
+                                       color,
+                                       media
                                    }: MessageRowProps) {
+    const imgContainerRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (media?.length && imgContainerRef?.current)
+            media.map((name, index) => getImage(name).then(content => {
+                    if (imgContainerRef?.current) {
+                        const ref: HTMLImageElement = imgContainerRef.current.children[index] as HTMLImageElement;
+                        if (ref) {
+                            ref.src = content || "";
+                        }
+                    }
+                })
+            );
+    })
     return (
         <div className={styles.messageContainer} onContextMenuCapture={e => {
             e.preventDefault()
@@ -39,7 +54,10 @@ export default function MessageRow({
                     <Text color="accent">{name}</Text>
                     <Text color="secondary" size="s">{getTimeHHMM(new Date(Number(time)))}</Text>
                 </div>
-
+                <div ref={imgContainerRef}>
+                    {media && media.map((name, index) => (
+                        <img key={name} alt="" className={styles.image}/>))}
+                </div>
                 {replyMessage?.message &&
                     <div className={styles.reply}>
                         <Text size="s" color="secondary">{replyMessage.name}</Text>

@@ -8,6 +8,7 @@ import MessageRow from "../../../components/events/messageRow";
 import RoomPopup from "../../../components/popups/roomPopup";
 import {MessageInput} from "../../../components/messageInput";
 import DateRow from "../../../components/events/dateRow";
+import {init, loadImage} from "../../../storage/media/save";
 
 interface RoomProps {
     roomId: string;
@@ -20,14 +21,20 @@ export default function Room({roomId}: RoomProps) {
         }
     });
 
-    function sendMessage(message: string, replyId: string | undefined) {
+    async function sendMessage(message: string, replyId: string | undefined, files: File[] | undefined) {
         if (!message || message.length < 1) {
             return
         }
+        const media: string[] = [];
+        if (files) {
+            const fileNames = await Promise.all(files.map(file => loadImage(file)));
+            media.push(...fileNames)
+        }
+        console.log(media)
         addEvent(roomId, {
             type: EventTypes.MESSAGE,
             message,
-            replyId: replyId
+            replyId: replyId, media: media
         })
         updateEvents(getRoomEvents(roomId))
         updateReplyMessageId('');
@@ -44,7 +51,6 @@ export default function Room({roomId}: RoomProps) {
     useEffect(() => {
         chatRef?.current?.scrollTo(0, chatRef?.current?.scrollHeight)
     }, [events])
-
     return (
         <div className={styles.roomContainer}>
             {popupOpen && <RoomPopup roomId={roomId} updateRoom={updateRoom} onClose={() => updatePopupOpen(false)}/>}
@@ -81,6 +87,7 @@ export default function Room({roomId}: RoomProps) {
                                     username={e.user}
                                     name={user?.name || ""}
                                     message={e.message}
+                                    media={e.media}
                                     id={e.id}
                                     color={user?.color || ""}
                                     replyMessage={{

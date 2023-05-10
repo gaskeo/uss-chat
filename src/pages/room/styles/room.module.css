@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     padding-top: 10px;
+    height: 90vh;
 }
 
 .chatContainer {
@@ -12,8 +13,9 @@
     width: 90vw;
     max-width: 800px;
     flex-direction: column;
-    max-height: 80vh;
-    min-height: 500px;
+    max-height: 90vh;
+    height: 100%;
+    overflow: hidden;
 }
 
 .chatHeader {
@@ -22,6 +24,7 @@
     height: 50px;
     display: flex;
     justify-content: space-between;
+    background-color: var(--color-accent-700);
 }
 
 .chatHeaderUserContainer {
