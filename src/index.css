@@ -39,6 +39,7 @@ a {
   --size-xl: 30px;
   --size-xxl: 35px;
   --size-xxxl: 50px;
+  --size-max-content-width: 800px;
 
   --font-size-s: 14px;
   --font-size-m: 16px;

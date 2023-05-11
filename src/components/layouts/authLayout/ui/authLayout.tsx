@@ -10,19 +10,23 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({children}: AuthLayoutProps) {
+    function onExit() {
+        logout();
+        navigate("/login");
+    }
+
     const user = getAuthUser();
     const navigate = useNavigate();
+    if (!user) return null;
+
     return (
         <>
-            <header className={styles.header}>
+            <header className={styles.authHeader}>
                 <Header>Local Chat</Header>
-                <div className={styles.userContainer}>
-                    <Avatar background={user?.color || ""} foreground="#000" letter={user?.name[0] || ""}/>
-                    <Text>{user?.name}</Text>
-                    <div className={styles.exit} onClick={() => {
-                        logout();
-                        navigate("/login");
-                    }}>
+                <div className={styles.authHeaderUserBlock}>
+                    <Avatar background={user?.color || ""} foreground="#000" letter={user.name[0]}/>
+                    <Text>{user.name}</Text>
+                    <div className={styles.exitButtonContainer} onClick={onExit}>
                         <Exit/>
                     </div>
                 </div>
