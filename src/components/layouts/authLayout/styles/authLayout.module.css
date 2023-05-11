@@ -1,12 +1,22 @@
 .authHeader {
     max-width: var(--size-max-content-width);
+    width: 90vw;
     height: 60px;
     margin-left: auto;
     margin-right: auto;
+    box-sizing: border-box;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media screen and (max-width: 512px) {
+    .authHeader {
+        width: 100vw;
+        padding-left: var(--size-xs);
+        padding-right: var(--size-xs);
+    }
 }
 
 .authHeaderUserBlock {
