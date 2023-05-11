@@ -1,10 +1,10 @@
-import {Event, EventDate, EventJoin, EventMessage, EventTypes} from "@/storage/models";
+import {Event, EventDate, EventJoin, EventMessage, EventTypes} from "src/storage/models";
 import React, {useEffect, useRef} from "react";
-import {getAuthUser, getUserPublic} from "@/storage";
+import {getAuthUser, getUserPublic} from "src/storage";
 import styles from "../styles/room.module.css";
-import DateRow from "@/components/events/dateRow";
-import JoinRow from "@/components/events/joinRow";
-import MessageRow from "@/components/events/messageRow";
+import DateRow from "src/components/events/dateRow";
+import JoinRow from "src/components/events/joinRow";
+import MessageRow from "src/components/events/messageRow";
 
 interface ChatContentProps {
     events: Event[];

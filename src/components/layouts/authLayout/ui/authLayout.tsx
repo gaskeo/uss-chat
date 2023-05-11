@@ -1,9 +1,9 @@
 import React from "react";
-import {Avatar, Header, Text} from "@/components/kit";
-import {getAuthUser, logout} from "@/storage";
+import {Avatar, Header, Text} from "src/components/kit";
+import {getAuthUser, logout} from "src/storage";
 import styles from "../styles/authLayout.module.css";
 import {useNavigate} from "react-router-dom";
-import {Exit} from "@/components/kit/icons";
+import {Exit} from "src/components/kit/icons";
 
 interface AuthLayoutProps {
     children: React.ReactNode;

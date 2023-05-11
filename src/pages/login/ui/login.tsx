@@ -1,10 +1,10 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/login.module.css";
-import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, selectRoom} from "@/storage";
-import {AuthMessages, messages, SystemMessages} from "@/storage/messages/messages";
-import {Room, User} from "@/storage/models";
+import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, selectRoom} from "src/storage";
+import {AuthMessages, messages, SystemMessages} from "src/storage/messages/messages";
+import {Room, User} from "src/storage/models";
 import {Link, useNavigate} from "react-router-dom";
-import {Button, Header, Input, Select, Text, Error} from "@/components/kit";
+import {Button, Header, Input, Select, Text, Error} from "src/components/kit";
 
 interface LoginProps {
     updateCurrentUser: React.Dispatch<React.SetStateAction<User | null>>

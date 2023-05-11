@@ -1,9 +1,9 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/register.module.css";
-import {register as registerStorage} from "@/storage";
-import {AuthMessages, messages, SystemMessages} from "@/storage/messages/messages";
+import {register as registerStorage} from "src/storage";
+import {AuthMessages, messages, SystemMessages} from "src/storage/messages/messages";
 import {Link, useNavigate} from "react-router-dom";
-import {Input, Header, Text, Button} from "@/components/kit";
+import {Input, Header, Text, Button, Error} from "src/components/kit";
 
 export default function Register() {
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -59,7 +59,7 @@ export default function Register() {
                            type="password"
                     />
 
-                    {message !== AuthMessages.OK && <Text>{messages[message]}</Text>}
+                    {message !== AuthMessages.OK && <Error message={messages[message]}/>}
                     <Button type="submit" color="success">Зарегистрироваться</Button>
                     <Link to="/login"><Text color="secondary">У меня уже есть аккаунт</Text></Link>
                 </form>

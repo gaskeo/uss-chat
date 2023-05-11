@@ -1,7 +1,7 @@
 import styles from "../styles/messageRow.module.css";
 import {Text} from "../../../kit";
 import React, {useEffect, useRef} from "react";
-import {getImage} from "@/storage";
+import {getImage} from "src/storage";
 
 interface MessageReplyMessageProps {
     replyMessageAuthor?: string;

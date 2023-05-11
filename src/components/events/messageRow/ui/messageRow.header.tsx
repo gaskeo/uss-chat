@@ -1,6 +1,6 @@
-import {getTimeHHMM} from "@/utils";
+import {getTimeHHMM} from "src/utils";
 import styles from "../styles/messageRow.module.css";
-import {Text} from "@/components/kit";
+import {Text} from "src/components/kit";
 import React from "react";
 
 interface MessageHeaderProps {

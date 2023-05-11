@@ -5,9 +5,10 @@ interface ButtonProps {
     children: React.ReactNode;
     type?: "button" | "submit";
     color?: "success" | "default";
+    onClick?: () => void;
 }
 
-export default function Button({children, type, color}: ButtonProps) {
+export default function Button({onClick, children, type, color}: ButtonProps) {
     function getStyle() {
         switch (color) {
             case undefined:
@@ -20,6 +21,7 @@ export default function Button({children, type, color}: ButtonProps) {
 
     return (
         <button
+            onClick={onClick}
             className={styles.button}
             type={type}
             style={getStyle()}

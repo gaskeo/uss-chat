@@ -1,7 +1,7 @@
-import {getUserPublic} from "@/storage";
+import {getUserPublic} from "src/storage";
 import styles from "../styles/room.module.css";
-import {AvatarList, Header} from "@/components/kit";
-import {Dots} from "@/components/kit/icons";
+import {AvatarList, Header} from "src/components/kit";
+import {Dots} from "src/components/kit/icons";
 import React from "react";
 
 interface ChatHeaderProps {

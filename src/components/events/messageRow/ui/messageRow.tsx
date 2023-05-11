@@ -1,10 +1,10 @@
 import styles from "../styles/messageRow.module.css";
-import {Avatar, Text} from "@/components/kit";
+import {Avatar, Text} from "src/components/kit";
 import React from "react";
 import {MessageRowHeader} from "./messageRow.header";
 import {MessageRowMediaData} from "./messageRow.mediaData";
 import {MessageRowReplyMessage} from "./messageRow.replyMessage";
-import {EventMessage} from "@/storage/models";
+import {EventMessage} from "src/storage/models";
 
 interface MessageRowProps {
     message: EventMessage;
@@ -35,7 +35,7 @@ export default function MessageRow({
     function onImageClick(src: string) {
         updateImagePopupSrc(src)
     }
-    console.log(messageReplyMessage)
+
     return (
         <div
             className={styles.messageRowContainer}

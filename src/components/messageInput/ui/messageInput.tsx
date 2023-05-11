@@ -1,10 +1,10 @@
 import styles from "../styles/messageInput.module.css";
 import React, {useRef, useState} from "react";
-import {getImageBlob} from "@/utils";
+import {getImageBlob} from "src/utils";
 import {FileStructure, MessageInputSelectedFiles} from "./messageInput.selectedFiles";
 import {MessageInputRow} from "./messageInput.row";
 import {MessageInputReplyMessage} from "./messageInput.replyMessage";
-import {EventMessage} from "@/storage/models";
+import {EventMessage} from "src/storage/models";
 
 interface MessageInputProps {
     onSendMessage: (message: string, replyId: string | undefined, files: File[] | undefined) => void;
@@ -20,7 +20,6 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
 
     function submit() {
         const files = selectedFiles.map(f => f.file);
-        console.log(replyMessage)
         onSendMessage(
             messageRef?.current?.value || "",
             replyMessage?.id,

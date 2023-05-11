@@ -217,3 +217,30 @@
     overflow: hidden;
     object-fit: cover;
 }
+
+.emojiButton {
+    cursor: pointer;
+    font-size: var(--size-xxl);
+}
+
+.emojiContainer {
+    right: var(--size-xxl);
+    max-height: 500px;
+    overflow-y: auto;
+    position: absolute;
+    padding: var(--size-xxs);
+
+    display: grid;
+    gap: var(--size-xxs);
+    grid-template-columns: repeat(10, 1fr);
+
+    background-color: var(--color-accent-100);
+    border-radius: var(--border-size-l);
+    transition: var(--transition-duration-m) transform;
+    transform-origin: bottom;
+}
+
+.emoji {
+    cursor: pointer;
+    font-size: var(--font-size-l);
+}

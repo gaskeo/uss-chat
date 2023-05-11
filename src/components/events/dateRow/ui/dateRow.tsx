@@ -1,6 +1,6 @@
 import styles from "../styles/dateRow.module.css";
-import {getDateDDMMYYYY} from "@/utils";
-import {Text} from "@/components/kit";
+import {getDateDDMMYYYY} from "src/utils";
+import {Text} from "src/components/kit";
 
 interface DateRowProps {
     timestamp: string;

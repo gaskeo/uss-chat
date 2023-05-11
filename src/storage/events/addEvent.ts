@@ -18,7 +18,6 @@ function addEvent(roomId: string, event: EventPublic) {
             id: Number(new Date()).toString() + generateSalt(),
         })
     }
-    console.log(event)
     events.push({
         ...event,
         time: Number(new Date()).toString(),

@@ -1,6 +1,6 @@
 import styles from "../styles/joinRow.module.css";
-import {Text} from "@/components/kit";
-import {getTimeHHMM} from "@/utils";
+import {Text} from "src/components/kit";
+import {getTimeHHMM} from "src/utils";
 
 interface JoinRowProps {
     username: string;

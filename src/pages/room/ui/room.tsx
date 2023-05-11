@@ -1,11 +1,11 @@
 import styles from "../styles/room.module.css";
 import React, {useEffect, useState} from "react";
-import {addEvent, getRoom, getEvents, setImage} from "@/storage";
-import {EventMessage, EventTypes} from "@/storage/models";
-import RoomPopup from "@/components/popups/roomPopup";
-import {MessageInput} from "@/components/messageInput";
+import {addEvent, getRoom, getEvents, setImage} from "src/storage";
+import {EventMessage, EventTypes} from "src/storage/models";
+import RoomPopup from "src/components/popups/roomPopup";
+import {MessageInput} from "src/components/messageInput";
 import {ChatHeader} from "./room.chatHeader";
-import {ImagePopup} from "@/components/popups/imagePopup";
+import {ImagePopup} from "src/components/popups/imagePopup";
 import {ChatContent} from "./room.chatContent";
 
 interface RoomProps {
@@ -35,7 +35,6 @@ export default function Room({roomId}: RoomProps) {
                 .all(files.slice(0, 5)
                     .map(file => setImage(file))))
         }
-        console.log(replyId)
         addEvent(roomId, {
             type: EventTypes.MESSAGE,
             message,

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from "react";
-import {getImage} from "@/storage";
+import {getImage} from "src/storage";
 import styles from "../styles/messageRow.module.css";
 
 interface MessageMediaDataProps {
