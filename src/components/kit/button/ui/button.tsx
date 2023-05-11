@@ -17,8 +17,13 @@ export default function Button({children, type, color}: ButtonProps) {
                 return {backgroundColor: "var(--color-accent-400)"};
         }
     }
+
     return (
-        <button className={styles.button} type={type} style={getStyle()}>
+        <button
+            className={styles.button}
+            type={type}
+            style={getStyle()}
+        >
             {children}
         </button>
     )

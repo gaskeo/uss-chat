@@ -40,7 +40,15 @@ a {
   --size-xxl: 35px;
   --size-xxxl: 50px;
 
+  --font-size-s: 14px;
   --font-size-m: 16px;
+  --font-size-l: 20px;
 
   --border-size-l: 10px;
+  --border-size-m: 5px;
+
+  --content-font-family: 'Mulish', sans-serif;
+  --header-font-family: 'Roboto', sans-serif;
+
+  --transition-duration-m: .3s;
 }

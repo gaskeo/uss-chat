@@ -1,33 +1,36 @@
-.inputContainer {
+.textareaContainer {
     width: 100%;
     box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--size-xxs);
 }
 
-.input {
+.textarea {
     resize: vertical;
+    width: 100%;
+    max-height: 100px;
+    height: var(--size-xxl);
+    min-height: var(--size-xxl);
+    padding: 6px;
+
     background-color: var(--color-accent-200);
     color: var(--color-secondary-1000);
-    width: 100%;
     box-sizing: border-box;
-    min-height: 35px;
-    height: 35px;
-    max-height: 100px;
-    border-radius: 5px;
+    border-radius: var(--border-size-m);
     border: none;
     outline: none;
-    padding: 6px;
-    transition: .3s background-color;
-    font-family: 'Mulish', sans-serif;
-    font-size: 16px;
+    font-family: var(--content-font-family);
+    font-size: var(--font-size-m);
+
+    transition: var(--transition-duration-m) background-color;
 }
 
-.input:focus-visible {
+.textarea:focus-visible {
     background-color: var(--color-accent-300);
 }
 
-.input::placeholder {
+.textarea::placeholder {
     color: var(--color-accent-700)
 }

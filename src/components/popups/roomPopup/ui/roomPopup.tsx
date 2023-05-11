@@ -31,7 +31,7 @@ export default function RoomPopup({roomId, updateRoom, onClose}: RoomPopupProps)
                 }}>
                     <div>
                         <Header>Название комнаты</Header>
-                        <Input value={room?.name} inputRef={nameRef}/>
+                        <Input defaultValue={room?.name} inputRef={nameRef}/>
                     </div>
                     <Button color="success" type="submit">Изменить</Button>
                 </form>

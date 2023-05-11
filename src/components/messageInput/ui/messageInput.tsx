@@ -56,7 +56,7 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
                 <ReplyMessage message={replyMessage.message} user={replyMessage.user} onCancel={onCancelReplyMessage}/>
             }
             <div className={styles.input}>
-                <Textarea inputRef={inputRef} onSubmit={submit} placeholder="Введите сообщение..."/>
+                <Textarea textareaRef={inputRef} onSubmit={submit} placeholder="Введите сообщение..."/>
                 <label className={styles.fileInput}>
                     <Attach/>
                     <input type="file" ref={fileRef} multiple onInput={loadPreviews}/>

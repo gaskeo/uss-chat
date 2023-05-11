@@ -5,7 +5,7 @@ import styles from "../styles/select.module.css";
 interface SelectProps {
     items: { value: string, label: string }[];
     label: string;
-    selectRef: RefObject<HTMLSelectElement>
+    selectRef: RefObject<HTMLSelectElement>;
 }
 
 export default function Select({items, label, selectRef}: SelectProps) {

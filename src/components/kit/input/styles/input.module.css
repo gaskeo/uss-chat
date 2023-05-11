@@ -1,26 +1,29 @@
-.inputContainer {
+.textareaContainer {
     width: 100%;
     box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--size-xxs);
 }
 
-.input {
+.textarea {
+    width: 100%;
+    height: var(--size-xxl);
+    box-sizing: border-box;
+    padding: var(--size-xxs);
+
     background-color: var(--color-accent-200);
     color: var(--color-secondary-1000);
-    width: 100%;
-    box-sizing: border-box;
-    height: 35px;
-    border-radius: 5px;
+    border-radius: var(--border-size-m);
     border: none;
     outline: none;
-    padding: 5px;
-    transition: .3s all;
-    font-family: 'Mulish', sans-serif;
-    font-size: 16px;
+    font-family: var(--content-font-family);
+    font-size: var(--font-size-m);
+
+    transition: var(--transition-duration-m) background-color;
 }
 
-.input:focus-visible {
+.textarea:focus-visible {
     background-color: var(--color-accent-300);
 }

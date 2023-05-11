@@ -3,7 +3,7 @@ import styles from "../styles/text.module.css";
 
 interface TextProps {
     children: React.ReactNode;
-    color?: "dominant" | "secondary" | "link" | "accent" | "invert"
+    color?: "dominant" | "secondary" | "link" | "accent" | "invert";
     size?: "s" | "m" | "l";
     pre?: boolean;
 }
@@ -29,19 +29,27 @@ export default function Text({size, children, color, pre}: TextProps) {
         switch (size) {
             case undefined:
             case "m":
-                return {fontSize: "16px"};
+                return {fontSize: "var(--font-size-m)"};
             case "l":
-                return {fontSize: "20px"};
+                return {fontSize: "var(--font-size-l)"};
             case "s":
-                return {fontSize: "14px"}
+                return {fontSize: "var(--font-size-s)"}
         }
     }
 
-    function getPre(): {whiteSpace: "pre"} | {} {
+    function getPre(): { whiteSpace: "pre" } | {} {
         if (pre) {
             return {whiteSpace: "pre-wrap"};
         }
         return {};
     }
-    return <p className={styles.text} style={{...getColor(), ...getSize(), ...getPre()}}>{children}</p>
+
+    return (
+        <p
+            className={styles.text}
+            style={{...getColor(), ...getSize(), ...getPre()}}
+        >
+            {children}
+        </p>
+    )
 }

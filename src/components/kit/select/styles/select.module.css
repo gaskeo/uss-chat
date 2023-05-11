@@ -1,21 +1,26 @@
 .selectContainer {
     width: 100%;
+
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--size-xxs);
 }
 
 .select {
+    cursor: pointer;
+    width: 100%;
+    height: var(--size-xxl);
+    box-sizing: border-box;
+
     background-color: var(--color-accent-200);
     color: var(--color-secondary-1000);
-    width: 100%;
-    box-sizing: border-box;
-    height: 35px;
-    font-family: 'Mulish', sans-serif;
-    font-size: 16px;
-    border-radius: 5px;
+    border-radius: var(--border-size-m);
     border: none;
     outline: none;
+    font-family: 'Mulish', sans-serif;
+    font-size: var(--font-size-m);
+
+    transition: var(--transition-duration-m) background-color;
 }
 
 .select:focus-visible {

@@ -1,16 +1,19 @@
 .avatar {
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: var(--size-xl);
+    height: var(--size-xl);
     aspect-ratio: 1 / 1;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-radius: 50%;
 }
 
 .letter {
-    font-family: 'Mulish', sans-serif;
-    font-size: 16px;
+    font-family: var(--content-font-family);
+    font-size: var(--font-size-m);
+
     line-height: 1;
     margin: 0;
 }

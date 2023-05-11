@@ -3,37 +3,39 @@ import React, {RefObject} from "react";
 import styles from "../styles/textarea.module.css";
 
 interface TextareaProps {
-    value?: string;
-    inputRef: RefObject<HTMLTextAreaElement>;
+    defaultValue?: string;
+    textareaRef: RefObject<HTMLTextAreaElement>;
     label?: string;
     onSubmit?: () => void;
     placeholder?: string;
 }
 
-export default function Textarea({value, placeholder, inputRef, label, onSubmit}: TextareaProps) {
-    const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+export default function Textarea({defaultValue, placeholder, textareaRef, label, onSubmit}: TextareaProps) {
+    function checkSubmit(e: React.KeyboardEvent<HTMLTextAreaElement>) {
         if(e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             onSubmit && onSubmit();
-            if (inputRef?.current) inputRef.current.style.height = "0";
+            if (textareaRef?.current) textareaRef.current.style.height = "0";
         }
     }
+
+    function minimizeHeight() {
+        if (textareaRef?.current) {
+            textareaRef.current.style.height = "0";
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+        }
+    }
+
     return (
-        <label className={styles.inputContainer}>
+        <label className={styles.textareaContainer}>
             {label && <Text>{label}</Text>}
             <textarea
                 placeholder={placeholder}
-                onKeyDown={onEnterPress}
-                className={styles.input}
-                ref={inputRef}
-                defaultValue={value}
-                onSubmit={()=> console.log(13)}
-                onInput={() => {
-                    if (inputRef?.current) {
-                        inputRef.current.style.height = "0";
-                        inputRef.current.style.height = `${inputRef.current.scrollHeight}px`
-                    }
-                }}
+                onKeyDown={checkSubmit}
+                className={styles.textarea}
+                ref={textareaRef}
+                defaultValue={defaultValue}
+                onInput={minimizeHeight}
             />
         </label>
     )
