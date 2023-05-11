@@ -16,7 +16,7 @@
     max-height: 90vh;
 
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
 
     border-radius: var(--border-size-l);
     background-color: var(--color-accent-500);

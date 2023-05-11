@@ -9,7 +9,7 @@ import {EventMessage} from "../../../../storage/models";
 interface MessageRowProps {
     message: EventMessage;
     isMyMessage?: boolean;
-    messageReplyMessage?: { name: string, id: string, message: string };
+    messageReplyMessage?: { name: string, id: string, message: string, imageName: string | undefined };
 
     onReply?: (id: string) => void;
     updateImagePopupSrc: (src: string) => void;
@@ -35,7 +35,7 @@ export default function MessageRow({
     function onImageClick(src: string) {
         updateImagePopupSrc(src)
     }
-
+    console.log(messageReplyMessage)
     return (
         <div
             className={styles.messageRowContainer}
@@ -51,6 +51,7 @@ export default function MessageRow({
                     onImageClick={onImageClick}
                 />
                 <MessageReplyMessage
+                    replyMessageImageName={messageReplyMessage?.imageName}
                     replyMessageAuthor={messageReplyMessage?.name}
                     replyMessageText={messageReplyMessage?.message}
                 />

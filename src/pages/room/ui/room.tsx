@@ -35,7 +35,7 @@ export default function Room({roomId}: RoomProps) {
                 .all(files.slice(0, 5)
                     .map(file => setImage(file))))
         }
-
+        console.log(replyId)
         addEvent(roomId, {
             type: EventTypes.MESSAGE,
             message,

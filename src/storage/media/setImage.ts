@@ -8,6 +8,7 @@ export async function setImage(image: File): Promise<string> {
             const request = indexedDB.open("localChat", 3);
             request.onerror = (event) => {
                 console.log(event);
+                reject(event);
             }
             request.onsuccess = () => {
                 const db = request.result;

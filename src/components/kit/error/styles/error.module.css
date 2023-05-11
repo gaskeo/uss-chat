@@ -1,0 +1,28 @@
+.error {
+    width: 100%;
+    padding: var(--size-xs) var(--size-xs) var(--size-xs) var(--size-xxl);
+    box-sizing: border-box;
+    position: relative;
+    background-color: var(--color-danger-500);
+    border-radius: var(--border-size-m);
+}
+
+.error p:before {
+    width: var(--size-m);
+    height: var(--size-m);
+    aspect-ratio: 1 / 1;
+    content: "❗";
+    position: absolute;
+    left: var(--size-xxs);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 2px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--color-secondary-1000);
+    border-radius: 50%;
+}

@@ -38,6 +38,10 @@
     margin-top: 2px;
     margin-left: 8px;
     position: relative;
+
+    display: flex;
+    gap: var(--size-xxs);
+    align-items: center;
 }
 
 .messageReplyMessageContainer:before {
@@ -50,6 +54,14 @@
     content: "";
     border-radius: 2px;
     background-color: var(--color-accent-100);
+}
+
+.messageReplyMessageImage {
+    width: var(--size-xxl);
+    height: var(--size-xxl);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    object-fit: cover;
 }
 
 .messageRowAvatarContainer {

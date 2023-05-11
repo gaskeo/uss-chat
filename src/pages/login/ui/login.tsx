@@ -4,7 +4,7 @@ import {getAuthUser, getCurrentRoom, getRooms, login as loginStorage, selectRoom
 import {AuthMessages, messages, SystemMessages} from "../../../storage/messages/messages";
 import {Room, User} from "../../../storage/models";
 import {Link, useNavigate} from "react-router-dom";
-import {Button, Header, Input, Select, Text} from "../../../components/kit";
+import {Button, Header, Input, Select, Text, Error} from "../../../components/kit";
 
 interface LoginProps {
     updateCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -58,7 +58,7 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
                             selectRef={roomRef}
                             items={roomSelectItems}
                     />
-                    {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
+                    {message !== AuthMessages.OK && <Error message={messages[message]}/>}
                     <Button type="submit" color="success">Войти</Button>
                     <Link to="/register"><Text color="secondary">Ещё нет аккаунта</Text></Link>
                 </form>

@@ -20,6 +20,7 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
 
     function submit() {
         const files = selectedFiles.map(f => f.file);
+        console.log(replyMessage)
         onSendMessage(
             messageRef?.current?.value || "",
             replyMessage?.id,

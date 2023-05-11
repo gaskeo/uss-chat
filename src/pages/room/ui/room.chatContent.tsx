@@ -15,7 +15,7 @@ interface ChatContentProps {
 export function ChatContent({events, onImageClick, onReplyClick}: ChatContentProps) {
     function eventToMessageRow(message: EventMessage) {
         const messageAuthor = getUserPublic(message.user);
-        const replyMessage = events.filter(message => (message.type === EventTypes.MESSAGE && message.id === message.replyId))[0] as EventMessage;
+        const replyMessage = events.filter(event => (event.type === EventTypes.MESSAGE && event.id == message.replyId))[0] as EventMessage;
 
         return <MessageRow
             key={message.time + message.type}
@@ -25,6 +25,7 @@ export function ChatContent({events, onImageClick, onReplyClick}: ChatContentPro
             updateImagePopupSrc={onImageClick}
             userColor={messageAuthor?.color || ""}
             messageReplyMessage={{
+                imageName: replyMessage?.media?.[0],
                 message: replyMessage?.message,
                 name: getUserPublic(replyMessage?.user)?.name || "",
                 id: replyMessage?.id
