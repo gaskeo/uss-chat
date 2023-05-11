@@ -28,7 +28,7 @@ export function MessageRowReplyMessage({
     if (!replyMessageText && !replyMessageAuthor && !replyMessageImageName) return null;
     return (
         <div className={styles.messageReplyMessageContainer}>
-            {replyMessageImageName && <img className={styles.messageReplyMessageImage} alt="" ref={replyImageRef}/>}
+            {replyMessageImageName && <div className={styles.messageReplyMessageImage}><img alt="" ref={replyImageRef}/></div>}
             <div>
                 <Text size="s" color="link">{replyMessageAuthor}</Text>
                 <Text size="s" color="secondary">{replyMessageText}</Text>

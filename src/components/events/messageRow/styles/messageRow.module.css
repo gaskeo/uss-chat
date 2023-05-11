@@ -80,7 +80,12 @@
     width: var(--size-xxl);
     height: var(--size-xxl);
     aspect-ratio: 1 / 1;
-    overflow: hidden;
+}
+
+.messageReplyMessageImage img {
+    width: var(--size-xxl);
+    height: var(--size-xxl);
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 

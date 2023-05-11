@@ -28,7 +28,7 @@ export function MessageInputReplyMessage({message, imageName, author, onCancel}:
     return (
         <div className={styles.messageReplyMessageContainer}>
             <div className={styles.replyMessageContent}>
-                {imageName && <img className={styles.messageReplyImage} alt="" ref={replyMediaRef}/>}
+                {imageName && <div className={styles.messageReplyImage}><img alt="" ref={replyMediaRef}/></div>}
                 <div>
                     <Text color="link" size="s">{author}</Text>
                     <Text color="secondary" size="s">{message}</Text>
