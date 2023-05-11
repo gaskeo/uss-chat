@@ -16,12 +16,11 @@ export function MessageInputSelectedFiles({files, onImageClick}: MessageInputSel
 
     return (
         <div className={styles.selectedFilesContainer}>
-
             {files.map(file =>
-                <div>
+                <div key={file.src.slice(0, 12)}>
                     <img
                         onClick={() => onImageClick(file)}
-                        key={file.src.slice(0, 12)} alt="" src={file.src}
+                        alt="" src={file.src}
                     />
                 </div>)}
         </div>

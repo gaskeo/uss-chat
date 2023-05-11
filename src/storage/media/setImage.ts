@@ -1,11 +1,10 @@
-import {generateSalt} from "../../utils";
+import {generateSalt, getImageBlob} from "../../utils";
 
-export async function uploadImage(image: File): Promise<string> {
+export async function setImage(image: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const fileName = generateSalt()
 
-        const reader = new FileReader();
-        reader.addEventListener("load", function () {
+        getImageBlob(image).then(blob => {
             const request = indexedDB.open("localChat", 3);
             request.onerror = (event) => {
                 console.log(event);
@@ -14,10 +13,9 @@ export async function uploadImage(image: File): Promise<string> {
                 const db = request.result;
                 const transaction = db.transaction("images", "readwrite");
                 const store = transaction.objectStore("images");
-                const putRequest = store.put({id: fileName, data: reader.result});
+                const putRequest = store.put({id: fileName, data: blob});
                 putRequest.onsuccess = () => resolve(fileName);
             }
         })
-        reader.readAsDataURL(image);
     })
 }

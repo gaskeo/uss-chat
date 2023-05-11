@@ -17,5 +17,5 @@ export {logout} from "./auth/logout";
 export {setName} from "./room/setName";
 
 export {initIndexedDB} from "./media/init";
-export {uploadImage} from "./media/uploadImage";
+export {setImage} from "./media/setImage";
 export {getImage} from "./media/getImage";

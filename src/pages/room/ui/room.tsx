@@ -1,6 +1,6 @@
 import styles from "../styles/room.module.css";
 import React, {useEffect, useState} from "react";
-import {addEvent, getRoom, getEvents, uploadImage} from "../../../storage";
+import {addEvent, getRoom, getEvents, setImage} from "../../../storage";
 import {EventMessage, EventTypes} from "../../../storage/models";
 import RoomPopup from "../../../components/popups/roomPopup";
 import {MessageInput} from "../../../components/messageInput";
@@ -33,7 +33,7 @@ export default function Room({roomId}: RoomProps) {
         if (files) {
             media.push(...await Promise
                 .all(files.slice(0, 5)
-                    .map(file => uploadImage(file))))
+                    .map(file => setImage(file))))
         }
 
         addEvent(roomId, {

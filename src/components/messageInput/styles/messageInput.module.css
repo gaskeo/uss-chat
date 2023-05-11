@@ -82,6 +82,8 @@
 .replyMessageContent {
     position: relative;
     padding-left: var(--size-xs);
+    display: flex;
+    gap: var(--size-xxs)
 }
 
 .replyMessageContent:before {
@@ -206,4 +208,12 @@
 
 .selectedFilesContainer > div:hover:before {
     opacity: 1;
+}
+
+.messageReplyImage {
+    width: var(--size-xxl);
+    height: var(--size-xxl);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    object-fit: cover;
 }

@@ -1,4 +1,4 @@
-async function loadImagePreview(file: File): Promise<string> {
+async function getImageBlob(file: File): Promise<string> {
     return new Promise((resolve) => {
         const reader = new FileReader();
 
@@ -12,4 +12,4 @@ async function loadImagePreview(file: File): Promise<string> {
     })
 }
 
-export {loadImagePreview};
+export {getImageBlob};

@@ -1,13 +1,14 @@
 import styles from "../styles/messageInput.module.css";
 import React, {useRef, useState} from "react";
-import {loadImagePreview} from "../../../utils";
+import {getImageBlob} from "../../../utils";
 import {FileStructure, MessageInputSelectedFiles} from "./messageInputSelectedFiles";
 import {MessageInputRow} from "./messageInputRow";
 import {MessageInputReplyMessage} from "./messageInputReplyMessage";
+import {EventMessage} from "../../../storage/models";
 
 interface MessageInputProps {
     onSendMessage: (message: string, replyId: string | undefined, files: File[] | undefined) => void;
-    replyMessage: { user: string, message: string, id: string } | undefined
+    replyMessage?: EventMessage;
     onCancelReplyMessage: () => void;
 }
 
@@ -43,7 +44,7 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
         const files = fileInputRef?.current?.files;
         if (files?.length) {
             Promise.all(Array.from(files).slice(0, 5)
-                .map(f => loadImagePreview(f)
+                .map(f => getImageBlob(f)
                     .then(src => ({src: src, file: f}))))
                 .then((n) => updateSelectedFiles([...selectedFiles, ...n]))
         }
@@ -62,6 +63,7 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
             <MessageInputReplyMessage
                 message={replyMessage?.message}
                 author={replyMessage?.user}
+                imageName={replyMessage?.media?.[0]}
                 onCancel={onCancelReplyMessage}
             />
 
