@@ -9,9 +9,10 @@ interface JoinRowProps {
 }
 
 export default function JoinRow({time, name}: JoinRowProps) {
+    const timeHHMM = getTimeHHMM(new Date(Number(time)));
     return (
         <div className={styles.joinRowContainer}>
-            <Text color="secondary">{getTimeHHMM(new Date(Number(time)))}</Text>
+            <Text color="secondary">{timeHHMM}</Text>
             <Text>{name} присоединился к комнате</Text>
         </div>
     )

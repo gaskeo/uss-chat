@@ -12,11 +12,6 @@ body {
   background-color: var(--color-accent-800);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 a {
   text-decoration: none;
 }
@@ -35,4 +30,17 @@ a {
   --color-accent-100: #89c2d9;
   --color-link-500: #5196BA;
   --color-link-300: #61DAFB;
+
+  --size-xxs: 5px;
+  --size-xs: 10px;
+  --size-s: 15px;
+  --size-m: 20px;
+  --size-l: 25px;
+  --size-xl: 30px;
+  --size-xxl: 35px;
+  --size-xxxl: 50px;
+
+  --font-size-m: 16px;
+
+  --border-size-l: 10px;
 }

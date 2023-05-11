@@ -77,12 +77,12 @@
     align-items: center;
 }
 
-.replyMessage {
+.messageReplyMessageContainer {
     position: relative;
     padding-left: 10px;
 }
 
-.replyMessage:before {
+.messageReplyMessageContainer:before {
     left: 0;
     width: 4px;
     border-radius: 2px;

@@ -3,14 +3,16 @@ import {getDateDDMMYYYY} from "../../../../utils";
 import {Text} from "../../../kit";
 
 interface DateRowProps {
-    time: string;
+    timestamp: string;
 }
 
-export default function DateRow({time}: DateRowProps) {
-    const date = new Date(Number(time));
+export default function DateRow({timestamp}: DateRowProps) {
+    const date = new Date(Number(timestamp));
+    const isThisYear = date.getFullYear() === new Date().getFullYear();
+    const dateDDMMYYYY = getDateDDMMYYYY(date, !isThisYear)
     return (
-        <div className={styles.dateRow}>
-            <Text color="dominant">{getDateDDMMYYYY(date, date.getFullYear() !== new Date().getFullYear())}</Text>
+        <div className={styles.dateRowContainer}>
+            <Text color="dominant">{dateDDMMYYYY}</Text>
         </div>
     )
 }

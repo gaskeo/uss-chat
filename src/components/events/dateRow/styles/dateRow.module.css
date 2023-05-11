@@ -1,12 +1,10 @@
-.dateRow {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 10px;
+.dateRowContainer {
     box-sizing: border-box;
-    background-color: var(--color-accent-300);
-    width: max-content;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 10px;
+    padding: var(--size-xs);
+    width: max-content;
+
+    background-color: var(--color-accent-300);
+    border-radius: var(--border-size-l);
 }

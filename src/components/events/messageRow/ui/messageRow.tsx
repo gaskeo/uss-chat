@@ -1,77 +1,71 @@
 import styles from "../styles/messageRow.module.css";
 import {Avatar, Text} from "../../../kit";
-import {getTimeHHMM} from "../../../../utils";
-import {getImage} from "../../../../storage/media/save";
-import React, {useEffect, useRef} from "react";
+import React from "react";
 import {ImagePopup} from "../../../popups/imagePopup";
+import {MessageHeader} from "./messageHeader";
+import { MessageMediaData } from "./messageMediaData";
+import {MessageReplyMessage} from "./messageReplyMessage";
 
 interface MessageRowProps {
-    id: string
+    messageId: string;
+    messageText: string;
+    messageMedia?: string[];
+    messageReplyMessage?: { name: string, id: string, message: string };
+    messageTimestamp: string;
+    isMyMessage?: boolean;
+    onReply?: (id: string) => void;
+    updateImagePopup: (r: React.ReactNode) => void;
+
     username: string;
     name: string;
-    time: string;
-    message: string
-    media?: string[]
-    replyMessage?: { name: string, id: string, message: string };
-    myMessage?: boolean;
-    onReply?: (id: string) => void;
-    color: string
-    updateImagePopup: (r: React.ReactNode) => void;
+    userColor: string;
 }
 
 export default function MessageRow({
-                                       replyMessage,
-                                       id,
+                                       messageReplyMessage,
+                                       messageId,
                                        onReply,
                                        name,
-                                       time,
-                                       message,
-                                       myMessage,
-                                       color,
-                                       media,
+                                       messageTimestamp,
+                                       messageText,
+                                       isMyMessage,
+                                       userColor,
+                                       messageMedia,
                                        updateImagePopup
                                    }: MessageRowProps) {
-    const imgContainerRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        if (media?.length && imgContainerRef?.current)
-            media.map((name, index) => getImage(name).then(content => {
-                    if (imgContainerRef?.current) {
-                        const ref: HTMLImageElement = imgContainerRef.current.children[index] as HTMLImageElement;
-                        if (ref) {
-                            ref.src = content || "";
-                            ref.onclick = () => updateImagePopup(<ImagePopup onClose={() => updateImagePopup(null)} src={content || ""}/>)
-                        }
-                    }
-                })
-            );
-    })
+    function onReplyInner(e: React.MouseEvent<HTMLDivElement>) {
+        e.preventDefault()
+        if (onReply) onReply(messageId);
+    }
+
+    function onImageClick(src: string) {
+        updateImagePopup(
+            <ImagePopup
+                onClose={() => updateImagePopup(null)}
+                src={src}
+            />
+        )
+    }
+
     return (
-        <div className={styles.messageContainer} onContextMenuCapture={e => {
-            e.preventDefault()
-            onReply && onReply(id);
-        }}>
-            <div className={`${styles.avatarContainer} ${myMessage ? styles.right : ""}`}>
-                <Avatar background={color} foreground="#000" letter={name[0]}/>
+        <div
+            className={styles.messageRowContainer}
+            onContextMenuCapture={onReplyInner}
+        >
+            <div className={`${styles.messageRowAvatarContainer} ${isMyMessage && styles.myAvatarContainer}`}>
+                <Avatar background={userColor} foreground="#000" letter={name[0].toUpperCase()}/>
             </div>
-            <div className={`${styles.messageRowContainer} ${myMessage ? styles.myMessage : ""}`}>
-                <div className={styles.messageHeader}>
-                    <Text color="link">{name}</Text>
-                    <Text color="secondary" size="s">{getTimeHHMM(new Date(Number(time)))}</Text>
-                </div>
-                {
-                    media &&
-                    <div ref={imgContainerRef} className={styles.imageContainer} data-items={media.length}>
-                        {media.map((name) => (
-                            <img key={name} alt="" className={styles.image}/>))}
-                    </div>
-                }
-                {replyMessage?.message &&
-                    <div className={styles.reply}>
-                        <Text size="s" color="link">{replyMessage.name}</Text>
-                        <Text size="s" color="secondary">{replyMessage.message}</Text>
-                    </div>
-                }
-                <Text pre>{message}</Text>
+            <div className={`${styles.messageContainer} ${isMyMessage && styles.myMessage}`}>
+                <MessageHeader author={name} timestamp={messageTimestamp}/>
+                <MessageMediaData
+                    media={messageMedia}
+                    onImageClick={onImageClick}
+                />
+                <MessageReplyMessage
+                    replyMessageAuthor={messageReplyMessage?.name}
+                    replyMessageText={messageReplyMessage?.message}
+                />
+                <Text pre>{messageText}</Text>
             </div>
         </div>
     )

@@ -76,7 +76,7 @@ export default function Room({roomId}: RoomProps) {
                         let user;
                         switch (e.type) {
                             case EventTypes.DATE:
-                                return <DateRow key={e.id} time={e.time}/>
+                                return <DateRow key={e.id} timestamp={e.time}/>
                             case EventTypes.JOIN:
                                 user = getUserPublic(e.user);
                                 return <JoinRow
@@ -90,22 +90,22 @@ export default function Room({roomId}: RoomProps) {
                                 const replyMessage = events.filter(message => (message.type === EventTypes.MESSAGE && message.id === e.replyId))[0] as EventMessage;
                                 return <MessageRow
                                     key={e.time + e.type}
-                                    time={e.time}
+                                    messageTimestamp={e.time}
                                     username={e.user}
                                     name={user?.name || ""}
-                                    message={e.message}
-                                    media={e.media}
-                                    id={e.id}
+                                    messageText={e.message}
+                                    messageMedia={e.media}
+                                    messageId={e.id}
                                     updateImagePopup={updateImagePopup}
-                                    color={user?.color || ""}
-                                    replyMessage={{
+                                    userColor={user?.color || ""}
+                                    messageReplyMessage={{
                                         message: replyMessage?.message,
                                         name: getUserPublic(replyMessage?.user)?.name || "",
                                         id: replyMessage?.id
                                     }}
 
                                     onReply={(id) => updateReplyMessageId(id)}
-                                    myMessage={e.user === currentUser?.username}
+                                    isMyMessage={e.user === currentUser?.username}
                                 />
                             default:
                                 return <div></div>
