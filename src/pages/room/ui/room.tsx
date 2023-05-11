@@ -2,7 +2,7 @@ import styles from "../styles/room.module.css";
 import React, {useEffect, useRef, useState} from "react";
 import {addEvent, getAuthUser, getRoom, getRoomEvents, getUserPublic} from "../../../storage";
 import {EventMessage, EventTypes} from "../../../storage/models";
-import {JoinRow} from "../../../components";
+import JoinRow from "../../../components/events/joinRow";
 import {Avatar, Header} from "../../../components/kit";
 import MessageRow from "../../../components/events/messageRow";
 import RoomPopup from "../../../components/popups/roomPopup";

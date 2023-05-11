@@ -1,55 +1,41 @@
 .loginContainer {
     width: 100vw;
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .loginForm {
-    border-radius: 10px;
-    padding: 20px;
-    background-color: var(--color-accent-500);
+    padding: var(--size-m);
     width: 90vw;
     max-width: 300px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background-color: var(--color-accent-500);
+    border-radius: var(--border-size-l);
 }
 
 .loginForm form {
     width: 90%;
+
     display: flex;
-    flex-direction: column;
-    gap: 10px;
     align-items: center;
+    flex-direction: column;
+    gap: var(--size-xs);
 }
 
 .loginHeader {
     margin-top: 0;
 }
 
-.loginInput {
+.loginInput, .loginInput * {
     display: block;
     width: 100%;
-}
-
-
-.loginInput * {
-    width: 100%;
-    display: block;
-}
-
-
-.loginInput input {
     box-sizing: border-box;
-}
-
-.loginMessage {
-
-}
-
-.loginSubmit {
-
 }

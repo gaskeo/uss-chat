@@ -8,10 +8,15 @@ import {Button, Header, Input, Select, Text} from "../../../components/kit";
 
 interface LoginProps {
     updateCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
-    updateCurrentRoom:  React.Dispatch<React.SetStateAction<Room | null>>
+    updateCurrentRoom: React.Dispatch<React.SetStateAction<Room | null>>
 }
 
 export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps) {
+    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        login();
+    }
+
     function login() {
         const password = passwordRef?.current?.value;
         const username = usernameRef?.current?.value;
@@ -27,27 +32,31 @@ export default function Login({updateCurrentUser, updateCurrentRoom}: LoginProps
             navigate("/room")
         }
     }
+
     const navigate = useNavigate();
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const roomRef = useRef<HTMLSelectElement>(null);
     const [message, updateMessage] = useState<AuthMessages | SystemMessages>(AuthMessages.OK)
     const rooms = getRooms();
+
+    const roomSelectItems = [
+        {value: "new", label: "Новая комната"},
+        ...rooms.map(room => ({value: room.id, label: room.name}))
+    ]
+
     return (
         <div className={styles.loginContainer}>
             <div className={styles.loginForm}>
                 <Header>
                     Войти в аккаунт
                 </Header>
-                <form onSubmit={e => {
-                    e.preventDefault();
-                    login();
-                }}>
+                <form onSubmit={onSubmit}>
                     <Input label="Username" inputRef={usernameRef}/>
                     <Input label="Пароль" inputRef={passwordRef} type="password"/>
                     <Select label="Комната"
                             selectRef={roomRef}
-                            items={[{value: "new", label: "Новая комната"}, ...rooms.map(r => ({value: r.id, label: r.name}))]}
+                            items={roomSelectItems}
                     />
                     {message !== AuthMessages.OK && <p className={styles.loginMessage}>{messages[message]}</p>}
                     <Button type="submit" color="success">Войти</Button>

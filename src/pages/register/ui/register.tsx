@@ -6,6 +6,11 @@ import {Link, useNavigate} from "react-router-dom";
 import {Input, Header, Text, Button} from "../../../components/kit";
 
 export default function Register() {
+    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        register();
+    }
+
     function register() {
         const password = passwordRef?.current?.value;
         const passwordAgain = passwordAgainRef?.current?.value;
@@ -37,10 +42,7 @@ export default function Register() {
                 <Header>
                     Регистрация
                 </Header>
-                <form onSubmit={e => {
-                    e.preventDefault();
-                    register();
-                }}>
+                <form onSubmit={onSubmit}>
                     <Input inputRef={usernameRef}
                            label="Username"
                     />
