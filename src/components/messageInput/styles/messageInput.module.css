@@ -225,7 +225,8 @@
 
 .emojiContainer {
     right: var(--size-xxl);
-    max-height: 500px;
+    max-height: min(500px, 50vh);
+    height: 50vh;
     overflow-y: auto;
     position: absolute;
     padding: var(--size-xxs);

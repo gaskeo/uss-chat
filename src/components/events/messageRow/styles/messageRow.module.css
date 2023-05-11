@@ -36,18 +36,38 @@
 .messageReplyMessageContainer {
     margin-bottom: 2px;
     margin-top: 2px;
-    margin-left: 8px;
+    padding-left: 8px;
     position: relative;
 
     display: flex;
     gap: var(--size-xxs);
     align-items: center;
+    overflow: hidden;
+}
+
+.messageReplyMessageContainer:after {
+    position: absolute;
+    display: block;
+    content: "";
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 80%, var(--color-accent-300) 100%);
+}
+
+.myMessage .messageReplyMessageContainer:after {
+    background: linear-gradient(90deg, transparent 80%, var(--color-accent-400) 100%);
+}
+
+.messageReplyMessageContainer * {
+    white-space: nowrap !important;
+    text-overflow: ellipsis;
 }
 
 .messageReplyMessageContainer:before {
     position: absolute;
     display: block;
-    left: -8px;
+    left: 0;
     width: 4px;
     height: 100%;
 

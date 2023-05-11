@@ -22,13 +22,33 @@
     background-color: var(--color-accent-500);
 }
 
+@media screen and (max-width: 512px) {
+    .roomContainer {
+        position: absolute;
+        top: 60px;
+        height: calc(100dvh - 60px);
+        padding: 0;
+        background-color: black;
+    }
+
+    .chatContainer {
+        max-height: unset;
+        width: 100vw;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+
 .chatHeader {
     padding-left: var(--size-xs);
     padding-right: var(--size-xs);
     height: 50px;
-
-    display: flex;
+    white-space: nowrap;
+    max-width: 100vw;
+    box-sizing: border-box;
+    display: grid;
     justify-content: space-between;
+    grid-template-columns: 1fr auto;
 
     background-color: var(--color-accent-700);
 }
@@ -37,6 +57,23 @@
     display: flex;
     align-items: center;
     gap: var(--size-xs);
+}
+
+.chatHeaderNameSection > h1 {
+    overflow: hidden;
+    max-width: 50vw;
+    position: relative;
+}
+
+.chatHeaderNameSection > h1:after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 80%, var(--color-accent-700) 100%);
 }
 
 .chatHeaderNameSection > div {

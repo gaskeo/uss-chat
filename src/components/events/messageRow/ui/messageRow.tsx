@@ -40,6 +40,7 @@ export default function MessageRow({
         <div
             className={styles.messageRowContainer}
             onContextMenuCapture={onReplyInner}
+            onDoubleClick={onReplyInner}
         >
             <div className={`${styles.messageRowAvatarContainer} ${isMyMessage && styles.myAvatarContainer}`}>
                 <Avatar background={userColor} foreground="#000" letter={messageAuthorName[0]}/>

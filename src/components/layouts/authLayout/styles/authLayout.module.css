@@ -1,5 +1,6 @@
 .authHeader {
     max-width: var(--size-max-content-width);
+    height: 60px;
     margin-left: auto;
     margin-right: auto;
 
