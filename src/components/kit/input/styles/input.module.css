@@ -1,4 +1,4 @@
-.textareaContainer {
+.inputContainer {
     width: 100%;
     box-sizing: border-box;
 
@@ -7,7 +7,7 @@
     gap: var(--size-xxs);
 }
 
-.textarea {
+.input {
     width: 100%;
     height: var(--size-xxl);
     box-sizing: border-box;
@@ -24,6 +24,6 @@
     transition: var(--transition-duration-m) background-color;
 }
 
-.textarea:focus-visible {
+.input:focus-visible {
     background-color: var(--color-accent-300);
 }

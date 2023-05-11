@@ -1,8 +1,9 @@
-import {getRoom, getUserPublic, setName} from "../../../../storage";
+import {getRoom, setName} from "../../../../storage";
 import styles from "../styles/roomPopup.module.css";
-import {Avatar, Button, Header, Input, Text} from "../../../kit";
 import React, {useRef} from "react";
 import {Room} from "../../../../storage/models";
+import {RoomPopupMembers} from "./roomPopupMembers";
+import {RoomPopupNameContainer} from "./roomPopupNameContainer";
 
 interface RoomPopupProps {
     roomId: string;
@@ -11,42 +12,28 @@ interface RoomPopupProps {
 }
 
 export default function RoomPopup({roomId, updateRoom, onClose}: RoomPopupProps) {
-    function changeName() {
-        if (nameRef?.current?.value.trim()) {
-            setName(roomId, nameRef?.current?.value.trim());
+    function onChangeName() {
+        const newName = nameRef?.current?.value.trim()
+        if (newName) {
+            setName(roomId, newName);
             updateRoom(getRoom(roomId));
         }
     }
 
     const room = getRoom(roomId);
     const nameRef = useRef<HTMLInputElement>(null)
+
     return (
         <>
-            <div className={styles.background} onClick={() => onClose()}/>
+            <div className={styles.background} onClick={onClose}/>
 
             <div className={styles.roomPopupContainer}>
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    changeName();
-                }}>
-                    <div>
-                        <Header>Название комнаты</Header>
-                        <Input defaultValue={room?.name} inputRef={nameRef}/>
-                    </div>
-                    <Button color="success" type="submit">Изменить</Button>
-                </form>
-                <div>
-                    <Header>Участники</Header>
-                    <div className={styles.userRowContainer}>
-                        {room?.users.map(u => {
-                            const user = getUserPublic(u);
-                            return <div className={styles.userRow}><Avatar background={user?.color || ""}
-                                                                           foreground="#000"
-                                                                           letter={user?.name[0] || ""}/><Text>{user?.name}</Text>
-                            </div>
-                        })}
-                    </div>
-                </div>
+                <RoomPopupNameContainer
+                    nameInputRef={nameRef}
+                    currentName={room?.name}
+                    onChangeName={onChangeName}
+                />
+                <RoomPopupMembers usernames={room?.users}/>
             </div>
         </>
     )
