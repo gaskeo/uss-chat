@@ -1,6 +1,6 @@
 import styles from "../styles/avatar.module.css";
 
-interface AvatarProps {
+export interface AvatarProps {
     background: string;
     foreground: string;
     letter?: string;

@@ -1,50 +1,39 @@
 import styles from "../styles/messageRow.module.css";
 import {Avatar, Text} from "../../../kit";
 import React from "react";
-import {ImagePopup} from "../../../popups/imagePopup";
 import {MessageHeader} from "./messageHeader";
-import { MessageMediaData } from "./messageMediaData";
+import {MessageMediaData} from "./messageMediaData";
 import {MessageReplyMessage} from "./messageReplyMessage";
+import {EventMessage} from "../../../../storage/models";
 
 interface MessageRowProps {
-    messageId: string;
-    messageText: string;
-    messageMedia?: string[];
-    messageReplyMessage?: { name: string, id: string, message: string };
-    messageTimestamp: string;
+    message: EventMessage;
     isMyMessage?: boolean;
-    onReply?: (id: string) => void;
-    updateImagePopup: (r: React.ReactNode) => void;
+    messageReplyMessage?: { name: string, id: string, message: string };
 
-    username: string;
-    name: string;
+    onReply?: (id: string) => void;
+    updateImagePopupSrc: (src: string) => void;
+
+    messageAuthorName: string;
     userColor: string;
 }
 
 export default function MessageRow({
                                        messageReplyMessage,
-                                       messageId,
                                        onReply,
-                                       name,
-                                       messageTimestamp,
-                                       messageText,
+                                       messageAuthorName,
                                        isMyMessage,
                                        userColor,
-                                       messageMedia,
-                                       updateImagePopup
+                                       updateImagePopupSrc,
+                                       message
                                    }: MessageRowProps) {
     function onReplyInner(e: React.MouseEvent<HTMLDivElement>) {
         e.preventDefault()
-        if (onReply) onReply(messageId);
+        if (onReply) onReply(message.id);
     }
 
     function onImageClick(src: string) {
-        updateImagePopup(
-            <ImagePopup
-                onClose={() => updateImagePopup(null)}
-                src={src}
-            />
-        )
+        updateImagePopupSrc(src)
     }
 
     return (
@@ -53,19 +42,19 @@ export default function MessageRow({
             onContextMenuCapture={onReplyInner}
         >
             <div className={`${styles.messageRowAvatarContainer} ${isMyMessage && styles.myAvatarContainer}`}>
-                <Avatar background={userColor} foreground="#000" letter={name[0].toUpperCase()}/>
+                <Avatar background={userColor} foreground="#000" letter={messageAuthorName[0]}/>
             </div>
             <div className={`${styles.messageContainer} ${isMyMessage && styles.myMessage}`}>
-                <MessageHeader author={name} timestamp={messageTimestamp}/>
+                <MessageHeader author={messageAuthorName} timestamp={message.time}/>
                 <MessageMediaData
-                    media={messageMedia}
+                    media={message.media}
                     onImageClick={onImageClick}
                 />
                 <MessageReplyMessage
                     replyMessageAuthor={messageReplyMessage?.name}
                     replyMessageText={messageReplyMessage?.message}
                 />
-                <Text pre>{messageText}</Text>
+                <Text pre>{message.message}</Text>
             </div>
         </div>
     )

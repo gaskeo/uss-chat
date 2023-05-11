@@ -1,3 +1,4 @@
 import Avatar from "./ui/avatar";
+import {AvatarList} from "./ui/avatarList";
 
-export {Avatar};
+export {Avatar, AvatarList};

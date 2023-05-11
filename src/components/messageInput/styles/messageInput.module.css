@@ -1,8 +1,8 @@
 .messageInputContainer {
-    position: absolute;
     width: 100%;
     left: 0;
     bottom: 0;
+    height: max-content;
     margin-bottom: 0;
     box-sizing: border-box;
     padding: var(--size-xs);

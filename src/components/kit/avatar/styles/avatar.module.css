@@ -17,3 +17,13 @@
     line-height: 1;
     margin: 0;
 }
+
+.avatarList {
+    display: flex;
+    align-items: center;
+}
+
+.avatarList > * {
+    margin-left: calc(-1 * var(--size-xs));
+}
+
