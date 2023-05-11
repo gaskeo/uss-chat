@@ -2,8 +2,8 @@ import {getRoom, setName} from "../../../../storage";
 import styles from "../styles/roomPopup.module.css";
 import React, {useRef} from "react";
 import {Room} from "../../../../storage/models";
-import {RoomPopupMembers} from "./roomPopupMembers";
-import {RoomPopupNameContainer} from "./roomPopupNameContainer";
+import {RoomPopupMembers} from "./roomPopup.members";
+import {RoomPopupNameContainer} from "./roomPopup.nameContainer";
 
 interface RoomPopupProps {
     roomId: string;

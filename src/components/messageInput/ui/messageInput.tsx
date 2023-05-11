@@ -1,9 +1,9 @@
 import styles from "../styles/messageInput.module.css";
 import React, {useRef, useState} from "react";
 import {getImageBlob} from "../../../utils";
-import {FileStructure, MessageInputSelectedFiles} from "./messageInputSelectedFiles";
-import {MessageInputRow} from "./messageInputRow";
-import {MessageInputReplyMessage} from "./messageInputReplyMessage";
+import {FileStructure, MessageInputSelectedFiles} from "./messageInput.selectedFiles";
+import {MessageInputRow} from "./messageInput.row";
+import {MessageInputReplyMessage} from "./messageInput.replyMessage";
 import {EventMessage} from "../../../storage/models";
 
 interface MessageInputProps {
