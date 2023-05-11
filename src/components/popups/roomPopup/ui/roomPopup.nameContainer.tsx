@@ -1,5 +1,5 @@
 import React, {RefObject} from "react";
-import {Button, Header, Input} from "../../../kit";
+import {Button, Header, Input} from "@/components/kit";
 
 interface RoomPopupNameContainerProps {
     onChangeName?: () => void;

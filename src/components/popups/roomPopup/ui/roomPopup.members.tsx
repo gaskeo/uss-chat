@@ -1,6 +1,6 @@
 import styles from "../styles/roomPopup.module.css";
-import {Avatar, Header, Text} from "../../../kit";
-import {getUserPublic} from "../../../../storage";
+import {Avatar, Header, Text} from "@/components/kit";
+import {getUserPublic} from "@/storage";
 import React from "react";
 
 interface RoomPopupMembersProps {

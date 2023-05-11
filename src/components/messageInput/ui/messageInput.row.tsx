@@ -1,8 +1,7 @@
 import React, {RefObject} from "react";
 import styles from "../styles/messageInput.module.css";
-import {Textarea} from "../../kit/textarea";
-import {Attach, Send} from "../../kit/icons";
-import {Button} from "../../kit";
+import {Attach, Send} from "@/components/kit/icons";
+import {Button, Textarea} from "@/components/kit";
 
 interface MessageInputRowProps {
     textareaRef: RefObject<HTMLTextAreaElement>;

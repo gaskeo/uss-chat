@@ -1,9 +1,9 @@
 import React, {useRef, useState} from "react";
 import styles from "../styles/register.module.css";
-import {register as registerStorage} from "../../../storage";
-import {AuthMessages, messages, SystemMessages} from "../../../storage/messages/messages";
+import {register as registerStorage} from "@/storage";
+import {AuthMessages, messages, SystemMessages} from "@/storage/messages/messages";
 import {Link, useNavigate} from "react-router-dom";
-import {Input, Header, Text, Button} from "../../../components/kit";
+import {Input, Header, Text, Button} from "@/components/kit";
 
 export default function Register() {
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {

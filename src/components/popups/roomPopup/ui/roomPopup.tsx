@@ -1,7 +1,7 @@
-import {getRoom, setName} from "../../../../storage";
+import {getRoom, setName} from "@/storage";
 import styles from "../styles/roomPopup.module.css";
 import React, {useRef} from "react";
-import {Room} from "../../../../storage/models";
+import {Room} from "@/storage/models";
 import {RoomPopupMembers} from "./roomPopup.members";
 import {RoomPopupNameContainer} from "./roomPopup.nameContainer";
 

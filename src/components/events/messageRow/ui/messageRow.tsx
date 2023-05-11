@@ -1,10 +1,10 @@
 import styles from "../styles/messageRow.module.css";
-import {Avatar, Text} from "../../../kit";
+import {Avatar, Text} from "@/components/kit";
 import React from "react";
 import {MessageRowHeader} from "./messageRow.header";
 import {MessageRowMediaData} from "./messageRow.mediaData";
 import {MessageRowReplyMessage} from "./messageRow.replyMessage";
-import {EventMessage} from "../../../../storage/models";
+import {EventMessage} from "@/storage/models";
 
 interface MessageRowProps {
     message: EventMessage;

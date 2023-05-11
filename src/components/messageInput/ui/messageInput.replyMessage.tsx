@@ -1,7 +1,7 @@
 import styles from "../styles/messageInput.module.css";
-import {Text} from "../../kit";
+import {Text} from "@/components/kit";
 import React, {useEffect, useRef} from "react";
-import {getImage} from "../../../storage";
+import {getImage} from "@/storage";
 
 interface ReplyMessageProps {
     message?: string;
