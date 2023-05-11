@@ -1,10 +1,9 @@
 import styles from "../styles/messageInput.module.css";
-import {Button, Input, Text} from "../../kit";
 import React, {useRef, useState} from "react";
-import {Send} from "../../kit/icons";
-import {Attach} from "../../kit/icons";
 import {loadImagePreview} from "../../../utils";
-import {Textarea} from "../../kit/textarea";
+import {FileStructure, MessageInputSelectedFiles} from "./messageInputSelectedFiles";
+import {MessageInputRow} from "./messageInputRow";
+import {MessageInputReplyMessage} from "./messageInputReplyMessage";
 
 interface MessageInputProps {
     onSendMessage: (message: string, replyId: string | undefined, files: File[] | undefined) => void;
@@ -12,21 +11,36 @@ interface MessageInputProps {
     onCancelReplyMessage: () => void;
 }
 
-function ReplyMessage({message, user, onCancel}: { message: string, user: string, onCancel: () => void }) {
-    return (
-        <div className={styles.replyMessageContainer}>
-            <div className={styles.replyMessage}>
-                <Text color="link" size="s">{user}</Text>
-                <Text color="secondary" size="s">{message}</Text>
-            </div>
-            <div className={styles.closeButton} onClick={onCancel}/>
-        </div>
-    )
-}
-
 export default function MessageInput({onSendMessage, replyMessage, onCancelReplyMessage}: MessageInputProps) {
-    function loadPreviews() {
-        const files = fileRef?.current?.files;
+    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        submit();
+    }
+
+    function submit() {
+        const files = selectedFiles.map(f => f.file);
+        onSendMessage(
+            messageRef?.current?.value || "",
+            replyMessage?.id,
+            files?.length ? files : undefined
+        );
+        clearFields();
+    }
+
+    function clearFields() {
+        if (messageRef?.current) messageRef.current.value = "";
+        if (fileInputRef?.current) fileInputRef.current.files = null;
+        updateSelectedFiles([]);
+    }
+
+    function onImageClick(clickedFile: FileStructure) {
+        updateSelectedFiles(
+            selectedFiles
+                .filter(currentFile => clickedFile !== currentFile));
+    }
+
+    function updateSelectedFilesFunc() {
+        const files = fileInputRef?.current?.files;
         if (files?.length) {
             Promise.all(Array.from(files).slice(0, 5)
                 .map(f => loadImagePreview(f)
@@ -35,44 +49,34 @@ export default function MessageInput({onSendMessage, replyMessage, onCancelReply
         }
     }
 
-    function submit() {
-        const files = selectedFiles.map(f => f.file);
-        onSendMessage(inputRef?.current?.value || "", replyMessage?.id, files?.length ? Array.from(files) : undefined);
-        if (inputRef?.current) inputRef.current.value = "";
-        if (fileRef?.current) fileRef.current.files = null;
-        updateSelectedFiles([]);
-    }
+    const messageRef = useRef<HTMLTextAreaElement>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const inputRef = useRef<HTMLTextAreaElement>(null);
-    const fileRef = useRef<HTMLInputElement>(null);
+    const [
+        selectedFiles,
+        updateSelectedFiles
+    ] = useState<FileStructure[]>([]);
 
-    const [selectedFiles, updateSelectedFiles] = useState<{ file: File, src: string }[]>([]);
     return (
-        <form className={styles.inputContainer} onSubmit={e => {
-            e.preventDefault();
-            submit();
-        }}>
-            {replyMessage &&
-                <ReplyMessage message={replyMessage.message} user={replyMessage.user} onCancel={onCancelReplyMessage}/>
-            }
-            <div className={styles.input}>
-                <Textarea textareaRef={inputRef} onSubmit={submit} placeholder="Введите сообщение..."/>
-                <label className={styles.fileInput}>
-                    <Attach/>
-                    <input type="file" ref={fileRef} multiple onInput={loadPreviews}/>
-                </label>
-                <div className={styles.sendButton}>
-                    <Button type="submit"><Send/></Button>
-                </div>
-            </div>
-            {
-                selectedFiles.length > 0 && (
-                    <div className={styles.selectedFilesContainer}>
-                        {selectedFiles.map(f =>
-                            <div><img onClick={() => updateSelectedFiles(selectedFiles.filter(o => f !== o))} key={f.src.slice(0, 6)} alt="" src={f.src}/></div>)}
-                    </div>
-                )
-            }
+        <form className={styles.messageInputContainer} onSubmit={onSubmit}>
+            <MessageInputReplyMessage
+                message={replyMessage?.message}
+                author={replyMessage?.user}
+                onCancel={onCancelReplyMessage}
+            />
+
+            <MessageInputRow
+                textareaRef={messageRef}
+                onSubmit={submit}
+                fileInputRef={fileInputRef}
+                onFileInput={updateSelectedFilesFunc}
+            />
+
+            <MessageInputSelectedFiles
+                files={selectedFiles}
+                onImageClick={onImageClick}
+            />
         </form>
     )
 }
+
