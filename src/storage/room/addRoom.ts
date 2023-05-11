@@ -1,10 +1,10 @@
 import {getRooms} from "./getRooms";
-import {getAuthUser} from "../auth/getAuthUser";
+import {getAuthUser} from "../user/getAuthUser";
 import {setRooms} from "./setRooms";
-import {addEvent} from "./addEvent";
+import {addEvent} from "../events/addEvent";
 import {EventTypes} from "../models";
 
-function createRoom(name?: string) {
+function addRoom(name?: string) {
     const authUser = getAuthUser();
 
     if (!authUser) {
@@ -25,4 +25,4 @@ function createRoom(name?: string) {
     return id;
 }
 
-export {createRoom};
+export {addRoom};

@@ -1,8 +1,6 @@
-import {createRoom} from "./createRoom";
-import {getRoomEvents} from "./getRoomEvents";
-import {getRoom} from "./getRoom";
-import {getAuthUser} from "../auth/getAuthUser";
-import {addEvent} from "./addEvent";
+import {addRoom} from "./addRoom";
+import {getAuthUser} from "../user/getAuthUser";
+import {addEvent} from "../events/addEvent";
 import {EventTypes} from "../models";
 import {getRooms} from "./getRooms";
 import {setRooms} from "./setRooms";
@@ -14,7 +12,7 @@ function selectRoom(roomId?: string) {
     }
 
     if (!roomId) {
-        roomId = createRoom();
+        roomId = addRoom();
     }
 
     const rooms = getRooms();

@@ -1,10 +1,9 @@
 import styles from "../styles/room.module.css";
 import React, {useEffect, useState} from "react";
-import {addEvent, getRoom, getRoomEvents} from "../../../storage";
+import {addEvent, getRoom, getEvents, uploadImage} from "../../../storage";
 import {EventMessage, EventTypes} from "../../../storage/models";
 import RoomPopup from "../../../components/popups/roomPopup";
 import {MessageInput} from "../../../components/messageInput";
-import {loadImage} from "../../../storage/media/save";
 import {ChatHeader} from "./room.chatHeader";
 import {ImagePopup} from "../../../components/popups/imagePopup";
 import {ChatContent} from "./room.chatContent";
@@ -34,7 +33,7 @@ export default function Room({roomId}: RoomProps) {
         if (files) {
             media.push(...await Promise
                 .all(files.slice(0, 5)
-                    .map(file => loadImage(file))))
+                    .map(file => uploadImage(file))))
         }
 
         addEvent(roomId, {
@@ -42,11 +41,11 @@ export default function Room({roomId}: RoomProps) {
             message,
             replyId: replyId, media: media
         })
-        updateEvents(getRoomEvents(roomId))
+        updateEvents(getEvents(roomId))
         updateReplyMessageId('');
     }
 
-    const [events, updateEvents] = useState(getRoomEvents(roomId));
+    const [events, updateEvents] = useState(getEvents(roomId));
     const [room, updateRoom] = useState(getRoom(roomId));
     const [replyMessageId, updateReplyMessageId] = useState("");
     const [roomPopupOpen, updateRoomPopupOpen] = useState(false);
@@ -55,7 +54,7 @@ export default function Room({roomId}: RoomProps) {
     const replyMessage = events.filter(e => (e.type === EventTypes.MESSAGE && e.id === replyMessageId))[0];
 
     useEffect(() => {
-        subscribeOnStorage(() => updateEvents(getRoomEvents(roomId)));
+        subscribeOnStorage(() => updateEvents(getEvents(roomId)));
     }, [roomId]);
 
     return (

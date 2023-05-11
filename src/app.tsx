@@ -8,7 +8,7 @@ import Register from "./pages/register";
 import {AuthLayout} from "./components/layouts";
 
 function App() {
-    const [currentUser, updateCurrentUser] = useState(getAuthUser());
+    const [_, updateCurrentUser] = useState(getAuthUser());
     const [currentRoom, updateCurrentRoom] = useState(getCurrentRoom());
 
     return (

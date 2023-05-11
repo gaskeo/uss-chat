@@ -1,15 +1,15 @@
 import {EventPublic, EventTypes} from "../models";
-import {getRoomEvents} from "./getRoomEvents";
+import {getEvents} from "./getEvents";
 import {setEvents} from "./setEvents";
 import {generateSalt, isDatesEqual} from "../../utils";
-import {getAuthUser} from "../auth/getAuthUser";
+import {getAuthUser} from "../user/getAuthUser";
 
 function addEvent(roomId: string, event: EventPublic) {
     const currentUser = getAuthUser();
     if (!currentUser) {
         return
     }
-    const events = getRoomEvents(roomId);
+    const events = getEvents(roomId);
 
     if (events.length === 0 || !isDatesEqual(new Date(), new Date(Number(events[events.length - 1].time)))) {
         events.push({
