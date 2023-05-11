@@ -7,7 +7,7 @@ interface MessageMediaDataProps {
     onImageClick: (src: string) => void;
 }
 
-export function MessageMediaData({media, onImageClick}: MessageMediaDataProps) {
+export function MessageRowMediaData({media, onImageClick}: MessageMediaDataProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
         if (media?.length && containerRef?.current)

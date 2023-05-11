@@ -8,7 +8,7 @@ interface MessageHeaderProps {
     timestamp: string;
 }
 
-export function MessageHeader({author, timestamp}: MessageHeaderProps) {
+export function MessageRowHeader({author, timestamp}: MessageHeaderProps) {
     const timeHHMM = getTimeHHMM(new Date(Number(timestamp)));
     return (
         <div className={styles.messageHeader}>

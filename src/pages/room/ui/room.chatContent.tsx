@@ -15,7 +15,7 @@ interface ChatContentProps {
 export function ChatContent({events, onImageClick, onReplyClick}: ChatContentProps) {
     function eventToMessageRow(message: EventMessage) {
         const messageAuthor = getUserPublic(message.user);
-        const replyMessage = events.filter(event => (event.type === EventTypes.MESSAGE && event.id == message.replyId))[0] as EventMessage;
+        const replyMessage = events.filter(event => (event.type === EventTypes.MESSAGE && event.id === message.replyId))[0] as EventMessage;
 
         return <MessageRow
             key={message.time + message.type}

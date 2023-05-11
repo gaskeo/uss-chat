@@ -9,7 +9,7 @@ interface MessageReplyMessageProps {
     replyMessageImageName?: string;
 }
 
-export function MessageReplyMessage({
+export function MessageRowReplyMessage({
                                         replyMessageAuthor,
                                         replyMessageText,
                                         replyMessageImageName

@@ -1,9 +1,9 @@
 import styles from "../styles/messageRow.module.css";
 import {Avatar, Text} from "../../../kit";
 import React from "react";
-import {MessageHeader} from "./messageHeader";
-import {MessageMediaData} from "./messageMediaData";
-import {MessageReplyMessage} from "./messageReplyMessage";
+import {MessageRowHeader} from "./messageRow.header";
+import {MessageRowMediaData} from "./messageRow.mediaData";
+import {MessageRowReplyMessage} from "./messageRow.replyMessage";
 import {EventMessage} from "../../../../storage/models";
 
 interface MessageRowProps {
@@ -45,12 +45,12 @@ export default function MessageRow({
                 <Avatar background={userColor} foreground="#000" letter={messageAuthorName[0]}/>
             </div>
             <div className={`${styles.messageContainer} ${isMyMessage && styles.myMessage}`}>
-                <MessageHeader author={messageAuthorName} timestamp={message.time}/>
-                <MessageMediaData
+                <MessageRowHeader author={messageAuthorName} timestamp={message.time}/>
+                <MessageRowMediaData
                     media={message.media}
                     onImageClick={onImageClick}
                 />
-                <MessageReplyMessage
+                <MessageRowReplyMessage
                     replyMessageImageName={messageReplyMessage?.imageName}
                     replyMessageAuthor={messageReplyMessage?.name}
                     replyMessageText={messageReplyMessage?.message}
